@@ -9,7 +9,7 @@
 
 ---
 
-📚 Write-Up Index
+#📚 Write-Up Index
 
 | 🏠 Room Name              | 🎯 Difficulty | 📘 Guide Link                        |
 |---------------------------|----------------|---------------------------------------|
@@ -18,7 +18,7 @@
 
 ---
 
-👤 About Me
+#👤 About Me
 
 I'm a cybersecurity learner working through the **TryHackMe Pentesting Path**
 🔗 [TryHackMe Profile](https://tryhackme.com/p/schenkee)  
