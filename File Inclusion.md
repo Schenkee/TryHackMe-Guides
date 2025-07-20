@@ -1,7 +1,7 @@
 # 🧠 TryHackMe Room: File Inclusion (Challenge Task Only)
 
 **Room URL:** [https://tryhackme.com/room/fileinc](https://tryhackme.com/room/fileinc)  
-**Author:** Schenkee
+**Author:** Schenkee  
 **Profile:** [https://tryhackme.com/p/schenkee](https://tryhackme.com/p/schenkee)
 
 ---
