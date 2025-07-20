@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Schenkee/TryHackME-Guides)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Schenkee/TryHackMe-Guides)
 ![TryHackMe](https://img.shields.io/badge/TryHackMe-Writeups-red?logo=tryhackme)
-![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![License](https://img.shields.io/badge/license-Guide--Only-blue)](LICENSE)
 
 > 🛡️ A curated collection of TryHackMe walkthroughs focusing on red teaming, web exploitation, and penetration testing fundamentals.
 
