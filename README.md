@@ -13,7 +13,7 @@
 
 | 🏠 Room Name              | 🎯 Difficulty | 📘 Guide Link                        |
 |---------------------------|----------------|---------------------------------------|
-| File Inclusion (inprogress)           | 🟡 Medium     | [View Guide](./File_Inclusion.md)   |
+| File Inclusion (inprogress)           | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
 | *(More Coming Soon)*      |               |                                       |
 
 ---
