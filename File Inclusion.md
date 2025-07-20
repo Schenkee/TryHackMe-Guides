@@ -14,7 +14,7 @@ This guide will cover the steps required to gain the flags to comeplete the Chal
 
 ---
 
-## 🧰 Tools I Use
+## 🧰 Tools I Used
 - Kali Linux
 - Metasploit
 - Curl
@@ -24,4 +24,4 @@ This guide will cover the steps required to gain the flags to comeplete the Chal
 
 ---
 
-TASK 1: Capture Flag1 at /etc/flag1
+## 🛠️ TASK 1: Capture Flag1 at /etc/flag1
