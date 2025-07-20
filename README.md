@@ -1,7 +1,7 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/tryhackme-writeups)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/tryhackme-writeups)
+![GitHub repo size](https://img.shields.io/github/repo-size/Schenkee/TryHackME-Guides)
+![GitHub last commit](https://img.shields.io/github/last-commit/Schenkee/TryHackMe-Guides)
 ![TryHackMe](https://img.shields.io/badge/TryHackMe-Writeups-red?logo=tryhackme)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
