@@ -36,6 +36,6 @@ You should end up with something like the below
   
 ![lab1 curl](./Images/lab1_curl.png)  
   
-This will then return a raw response from the web server whhich will contain our flag as below.  
+This will then return a raw response from the web server whhich will contain our flag as below.
 
 ![lab1_flag](./Images/lab1_flag.png)
