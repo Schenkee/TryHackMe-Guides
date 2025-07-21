@@ -90,4 +90,11 @@ You should end up with something like the below
   
 Once the data has been returned we can then open our created file using ```cat file.txt```  
 This will return the below with the required flag for task 3.  
-![lab3_flag](./Images/lab3_flag.png)
+![lab3_flag](./Images/lab3_flag.png)  
+
+
+---
+
+## 🛠️ TASK 4: Gain RCE in Lab #Playground and find the hostname
+
+
