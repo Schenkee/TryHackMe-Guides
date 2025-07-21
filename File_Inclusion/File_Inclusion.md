@@ -24,6 +24,10 @@ This guide will cover the steps required to gain the flags to comeplete the Chal
 ---
 
 ## 🛠️ TASK 1: Capture Flag1 at /etc/flag1
-Navigate to the first task at **http://MACHINE_IP/challenges/index.php** Once the page loads we are greeted with a important message to aid us in capturing the flag.  
-The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter!
+Navigate to the first task at **http://MACHINE_IP/challenges/chall1.php** Once the page loads we are greeted with a important message to aid us in capturing the flag.  
+The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter! This message gives us a great starting point as we know we need to send a POST request. This can be done in a couple of different manners such as BurpSuite or Curl.
+
+In this instance I will use Curl to generate the POST request and recive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
+
+curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1
 
