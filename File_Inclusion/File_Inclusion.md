@@ -115,7 +115,7 @@ If done correctly we will be able to see a **GET** requested recived in our term
 ![lab4_pull_request](./Images/lab4_pull_request.png)
 
 And we can also confirm the test on the website where we can see the output contents of our file.
-![lab4_web_result](./Images_lab4_web_result)  
+![lab4_web_result](./Images/lab4_web_result.png)  
 
 This confirms there is a RFI vulnerability which we can exploit to gain RCE access.  
 
