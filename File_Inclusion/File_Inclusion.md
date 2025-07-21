@@ -62,3 +62,18 @@ So lets use that knowledge and see if we can input the flag2 path as the cookie 
 
 Refresh the page and we can see that we have been able to successfully view the contents of flag2 by tampering with the cookie value.  
 ![lab2_flag](./Images/lab2_flag.png)
+
+
+---
+
+## 🛠️ TASK 3: Capture Flag2 at /etc/flag3  
+Task 3 was arguably the one I spent the most time working through and via a process of elimination/trial and error I managed to get the flag. Once we load up the challange at **http://MACHINE_IP/challenges/chall3.php** we will not see anything of not such as with the two previouse tasks. So as a start lets just pop in our file path and see what is returned.  
+Entering ```../../../../etc/flag3``` into the input form will not return our flag. But the result does contain some useful information for us. Below is the returned information.  
+![lab3_start](./Images/lab3_start.png)  
+
+We can see from this image that there appears to be some input sanitisation occuring which has modifed our input from ```../../../../etc/flag3``` to simply ```etcflag.php``` This indicates that the web server is removing dots and slashes and also appending the input with .php indicating the developer has specified the file type to pass to the include function. We can bypass this last part via a null byte ```%00``` 
+After some trial and error I was still not able to find any success with the website and decided to try using Curl again ro make the request.  
+I first attempted a Curl request similar to what we used in Task 1 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" ``` Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```
+-X is used with curl to change the request method from the default of GET to something else such as POST in this case  
+-d is used to set the data to send with the POST request in this case file=../../../../etc/flag3%00  
+-o is used to output the returned result into a file of the specified name and type.
