@@ -29,14 +29,14 @@ The page reads "The Input form is broken! You need to send **'POST'** request wi
 
 In this instance I will use Curl to generate the POST request and receive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
 
-```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ```  
+```curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag1" ```  
 #### ⚙️ **Options**  
--X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request.     
--d is used to set the data to send with the POST request in this case file=../../../../etc/flag1  
+-d is used to set the data to send, in this case ```file=../../../../etc/flag1``` using the -d flag will default the request into a POST request.  
   
 You should end up with something like the below  
 ![lab1 curl](./Images/lab1_curl.png)  
-  
+I did use -X and -d which I later learnt was not required and only -d was needed.  
+
 This will then return a raw response from the web server which will contain our flag as below.
 ![lab1_flag](./Images/lab1_flag.png)
 
@@ -81,12 +81,12 @@ Which returned an error messaged indication that the output needed to be passed 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
 #### ⚙️ **Options**    
--X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request.  
--d is used to set the data to send with the POST request in this case file=../../../../etc/flag3%00  
+-d is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request. 
 -o is used to output the returned result into a file of the specified name and type.  
 
 You should end up with something like the below  
 ![lab3 curl](./Images/lab3_curl.png)  
+I did use -X and -d which I later learnt was not required and only -d was needed.  
   
 Once the data has been returned we can then open our created file using ```cat file.txt```  
 This will return the below with the required flag for task 3.  
