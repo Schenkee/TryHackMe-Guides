@@ -15,7 +15,7 @@
 
 # 👤 About Me
 
-I'm a cybersecurity learner working through the **TryHackMe Pentesting Path**
+I'm a cybersecurity learner working through the various different practical hands on guides and creating walk throughs of labs I find interesting and helpful to demonstrate my learned skills.  
 🔗 [TryHackMe Profile](https://tryhackme.com/p/schenkee)  
 
 ---
