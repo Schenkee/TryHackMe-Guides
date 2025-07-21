@@ -81,7 +81,7 @@ Which returned an error messaged indication that the output needed to be passed 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
 #### ⚙️ **Options**    
--d is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request. 
+-d is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request.  
 -o is used to output the returned result into a file of the specified name and type.  
 
 You should end up with something like the below  
