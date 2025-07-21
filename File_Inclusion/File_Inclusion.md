@@ -38,3 +38,16 @@ You should end up with something like the below
   
 This will then return a raw response from the web server whhich will contain our flag as below.
 ![lab1_flag](./Images/lab1_flag.png)
+
+
+---
+
+## 🛠️ TASK 2: Capture Flag2 at /etc/flag2  
+Now lets move onto the second challange at **http://MACHINE_IP/challenges/chall2.php** This time once the page loads we are greeted with a message asking us to refresh the page.  
+Lets refresh as requested and then we are given some more important information as to the likley path for capture the flag. The page reads as below  
+!(lab2_start](./Images/lab2_start.png)  
+  
+Lets inspect the page to see if we can work out whats going on here and how we can change ourselves to be an **admin** on investigtion of the cookie in the **Network** tab we can see that the cookie has a paramater of **THM=Guest** which we might be able to edit.  
+![lab2_cookie view](./Images/lab2_cookie%20view.png)  
+
+Lets see if we can edit this cookie parameter to make oursevles an admin. Navigate to the **Storage** tab to modify the cookie.
