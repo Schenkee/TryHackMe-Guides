@@ -80,6 +80,14 @@ I first attempted a Curl request similar to what we used in Task 1  ```curl http
 Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using the below  
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
+#### ⚙️ **Options**    
 -X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request. 
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag3%00  
--o is used to output the returned result into a file of the specified name and type.
+-o is used to output the returned result into a file of the specified name and type.  
+
+You should end up with something like the below  
+![lab3 curl](./Images/lab3_curl.png)  
+  
+Once the data has been returned we can then open our created file using ```cat file.txt```  
+This will return the below with the required flag for task 3.  
+![lab3_flag](./Images/lab3_flag.png)
