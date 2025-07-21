@@ -58,4 +58,7 @@ Once we have adjusted the cookie refresh the page and if succesfull we should re
 
 Now we might think, that once we are the admin we can simply request the flag via the url bar as in previouse tasks. But in this instance that will not yeild any results, but what we did learn via the above steps is that we are able to tamper with the cookie.  
 So lets use that knowledge and see if we can input the flag2 path as the cookie value. Navigate back to your browsers **storage** tab in the Developer Tools and adjust the cookie value to ```../../../../etc/flag2%00```  
-![lab2_cookie_path](./Images/lab2_cookie_path.png)
+![lab2_cookie_path](./Images/lab2_cookie_path.png)  
+
+Refresh the page and we can see that we have been able to sucfessult view the contents of flag2 by tampering with the cookie value.  
+![lab2_flag](./Images/lab2_flag.png)
