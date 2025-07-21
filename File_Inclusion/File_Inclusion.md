@@ -103,7 +103,7 @@ Open up your terminal and input ```echo "Hello World" > test.php``` This will cr
 
 Next we need to setup a http server in the same directory as our file which will be used to download the file onto the target. We can do this via the below  
 ```python3 -m http.server 8080```  
-Which would look like this
+Which would look like this  
 ![lab4_http_server](./Images/Lab4_http_server.png)
 
 ### 🔥 Metasploit option  
