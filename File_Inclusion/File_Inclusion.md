@@ -29,6 +29,6 @@ The page reads "The Input form is broken! You need to send **'POST'** request wi
 
 In this instance I will use Curl to generate the POST request and recive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
 
-```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ```
--X is used with curl to change the request method from the default of GET to something else such as POST in this case
+```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ```  
+-X is used with curl to change the request method from the default of GET to something else such as POST in this case  
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag1
