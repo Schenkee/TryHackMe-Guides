@@ -33,6 +33,6 @@ In this instance I will use Curl to generate the POST request and recive the fla
 -X is used with curl to change the request method from the default of GET to something else such as POST in this case  
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag1
 You should end up with something like the below
-(./Images/lab1_curl.png)
+(https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/Images/lab1_curl.png)
 
 This will then return a raw response from the web server whhich will contain our flag as below.
