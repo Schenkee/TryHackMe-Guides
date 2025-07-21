@@ -81,7 +81,7 @@ Which returned an error messaged indication that the output needed to be passed 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
 #### ⚙️ **Options**    
--X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request. 
+-X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request.  
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag3%00  
 -o is used to output the returned result into a file of the specified name and type.  
 
