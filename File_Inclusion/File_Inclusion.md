@@ -30,7 +30,7 @@ The page reads "The Input form is broken! You need to send **'POST'** request wi
 In this instance I will use Curl to generate the POST request and receive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ```  
--X is used with curl to change the request method from the default of GET to something else such as POST in this case  
+-X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request.     
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag1  
   
 You should end up with something like the below  
@@ -79,6 +79,6 @@ I first attempted a Curl request similar to what we used in Task 1  ```curl http
 Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using the below  
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
--X is used with curl to change the request method from the default of GET to something else such as POST in this case  
+-X is used with curl to change the request method from the default of GET to something else such as POST in this case. -X is not techincally required as a Curl request passed with -d should automtically become a **POST** request. 
 -d is used to set the data to send with the POST request in this case file=../../../../etc/flag3%00  
 -o is used to output the returned result into a file of the specified name and type.
