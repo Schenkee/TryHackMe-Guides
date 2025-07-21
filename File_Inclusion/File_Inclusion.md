@@ -24,6 +24,6 @@ This guide will cover the steps required to gain the flags to comeplete the Chal
 ---
 
 ## 🛠️ TASK 1: Capture Flag1 at /etc/flag1
-Navigate to the first task at <span style="color:red"> http://MACHINE_IP/challenges/index.php</span> Once the page loads we are greeted with a important message to aid us in capturing the flag.  
-The page reads "The Input form is broken! You need to send 'POST' request with 'file' parameter!
-<span style="color:red">This text is red</span>
+Navigate to the first task at **http://MACHINE_IP/challenges/index.php** Once the page loads we are greeted with a important message to aid us in capturing the flag.  
+The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter!
+
