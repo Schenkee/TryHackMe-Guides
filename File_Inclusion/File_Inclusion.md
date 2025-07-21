@@ -47,11 +47,15 @@ Now lets move onto the second challange at **http://MACHINE_IP/challenges/chall2
 Lets refresh as requested and then we are given some more important information as to the likley path for capture the flag. The page reads as below  
 ![lab2_start](./Images/lab2_start.png)  
   
-Lets inspect the page to see if we can work out whats going on here and how we can change ourselves to be an **admin** on investigtion of the cookie in the **Network** tab we can see that the cookie has a paramater of **THM=Guest** which we might be able to edit.  
+Lets inspect the page via the browsers Developer Tools to see if we can work out whats going on here and how we can change ourselves to be an **admin** on investigtion of the cookie in the **Network** tab we can see that the cookie has a paramater of **THM=Guest** which we might be able to edit.  
 ![lab2_cookie view](./Images/lab2_cookie%20view.png)  
 
 Lets see if we can edit this cookie parameter to make oursevles an admin. Navigate to the **Storage** tab to modify the cookie. Lets adjust the cookie value from Guest to **admin** 
 ![lab2_cookie](./Images/lab2_cookie.png)
 
 Once we have adjusted the cookie refresh the page and if succesfull we should revice a new message as below.  
-![lab2_cookie_success](./Images/lab2_cookie_success.png)
+![lab2_cookie_success](./Images/lab2_cookie_success.png)  
+
+Now we might think, that once we are the admin we can simply request the flag via the url bar as in previouse tasks. But in this instance that will not yeild any results, but what we did learn via the above steps is that we are able to tamper with the cookie.  
+So lets use that knowledge and see if we can input the flag2 path as the cookie value. Navigate back to your browsers **storage** tab in the Developer Tools and adjust the cookie value to ```../../../../etc/flag2%00```  
+![lab2_cookie_path](./Images/lab2_cookie_path.png)
