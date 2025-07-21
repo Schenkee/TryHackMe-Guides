@@ -97,7 +97,7 @@ This will return the below with the required flag for task 3.
 
 ## 🛠️ TASK 4: Gain RCE in Lab #Playground and find the hostname
 As mentioned in the top summary I will demonstrate two different methods to gain RCE access to this lab one via Metasploit and one by loading a TCP Reverse Shell manually.  
-But first lets to a quick manual test to verify the RFI vulnerability, is actually present, before we work on obtaining RCE access.    
+But first lets to a quick manual test to verify the RFI vulnerability is actually present, before we work on obtaining RCE access.    
 Open up your terminal and input ```echo "Hello World" > test.php``` This will create a .PHP file with "Hello World"  
 ![lab4_hello_world](./Images/lab4_hello_world.png)  
 
