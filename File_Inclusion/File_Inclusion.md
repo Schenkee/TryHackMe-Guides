@@ -75,9 +75,8 @@ Entering ```../../../../etc/flag3``` into the input form will not return our fla
 We can see from this image that there appears to be some input sanitisation occuring which has modifed our input from ```../../../../etc/flag3``` to simply ```etcflag.php``` This indicates that the web server is removing dots and slashes and also appending the input with .php indicating the developer has specified the file type to pass to the include function. We can bypass this last part via a null byte.
 
 After some trial and error I was still not able to find any success with the website and decided to try using Curl again ro make the request.  
-I first attempted a Curl request similar to what we used in Task 1  
-```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" ```   
-Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using  
+I first attempted a Curl request similar to what we used in Task 1  ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" ```     
+Which returned an error messaged indication that the output needed to be passed to a fail, as such I modified my input to output the returned data into a file using the below  
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
 -X is used with curl to change the request method from the default of GET to something else such as POST in this case  
