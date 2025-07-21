@@ -9,7 +9,7 @@
 ## 🧩 Challenge Task Overview
 
 **Objective:**  
-This guide will cover the steps required to gain the flags to comeplete the Challege task of the room. We will cover 2 different methods to gian RCE access to /playground.php for question 4. Please read through the initial tasks to gain an understanding of Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal Vulnerabilites.
+This guide will cover the steps required to gain the flags to complete the Challenge task of the room. We will cover 2 different methods to gain RCE access to /playground.php for question 4. Please read through the initial tasks to gain an understanding of Local File Inclusion (LFI), Remote File Inclusion (RFI), and directory traversal Vulnerability.
 
 ---
 
@@ -27,7 +27,7 @@ This guide will cover the steps required to gain the flags to comeplete the Chal
 Navigate to the first task at **http://MACHINE_IP/challenges/chall1.php** Once the page loads we are greeted with a important message to aid us in capturing the flag.  
 The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter! This message gives us a great starting point as we know we need to send a POST request. This can be done in a couple of different manners such as BurpSuite or Curl.
 
-In this instance I will use Curl to generate the POST request and recive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
+In this instance I will use Curl to generate the POST request and receive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag1" ```  
 -X is used with curl to change the request method from the default of GET to something else such as POST in this case  
@@ -36,29 +36,29 @@ In this instance I will use Curl to generate the POST request and recive the fla
 You should end up with something like the below  
 ![lab1 curl](./Images/lab1_curl.png)  
   
-This will then return a raw response from the web server whhich will contain our flag as below.
+This will then return a raw response from the web server which will contain our flag as below.
 ![lab1_flag](./Images/lab1_flag.png)
 
 
 ---
 
 ## 🛠️ TASK 2: Capture Flag2 at /etc/flag2  
-Now lets move onto the second challange at **http://MACHINE_IP/challenges/chall2.php** This time once the page loads we are greeted with a message asking us to refresh the page.  
-Lets refresh as requested and then we are given some more important information as to the likley path for capture the flag. The page reads as below  
+Now lets move onto the second challenge at **http://MACHINE_IP/challenges/chall2.php** This time once the page loads we are greeted with a message asking us to refresh the page.  
+Lets refresh as requested and then we are given some more important information as to the likely path for capture the flag. The page reads as below  
 ![lab2_start](./Images/lab2_start.png)  
   
-Lets inspect the page via the browsers Developer Tools to see if we can work out whats going on here and how we can change ourselves to be an **admin** on investigtion of the cookie in the **Network** tab we can see that the cookie has a paramater of **THM=Guest** which we might be able to edit.  
+Lets inspect the page via the browsers Developer Tools to see if we can work out what’s going on here and how we can change ourselves to be an **admin** on investigation of the cookie in the **Network** tab we can see that the cookie has a parameter of **THM=Guest** which we might be able to edit.  
 ![lab2_cookie view](./Images/lab2_cookie%20view.png)  
 
-Lets see if we can edit this cookie parameter to make oursevles an admin. Navigate to the **Storage** tab to modify the cookie. Lets adjust the cookie value from Guest to **admin** 
+Lets see if we can edit this cookie parameter to make ourselves an admin. Navigate to the **Storage** tab to modify the cookie. Lets adjust the cookie value from Guest to **admin** 
 ![lab2_cookie](./Images/lab2_cookie.png)
 
-Once we have adjusted the cookie refresh the page and if succesfull we should revice a new message as below.  
+Once we have adjusted the cookie refresh the page and if successful we should revise a new message as below.  
 ![lab2_cookie_success](./Images/lab2_cookie_success.png)  
 
-Now we might think, that once we are the admin we can simply request the flag via the url bar as in previouse tasks. But in this instance that will not yeild any results, but what we did learn via the above steps is that we are able to tamper with the cookie.  
+Now we might think, that once we are the admin we can simply request the flag via the address bar as in previous tasks. But in this instance that will not yield any results, but what we did learn via the above steps is that we are able to tamper with the cookie.  
 So lets use that knowledge and see if we can input the flag2 path as the cookie value. Navigate back to your browsers **storage** tab in the Developer Tools and adjust the cookie value to ```../../../../etc/flag2%00```  
 ![lab2_cookie_path](./Images/lab2_cookie_path.png)  
 
-Refresh the page and we can see that we have been able to sucfessult view the contents of flag2 by tampering with the cookie value.  
+Refresh the page and we can see that we have been able to successfully view the contents of flag2 by tampering with the cookie value.  
 ![lab2_flag](./Images/lab2_flag.png)
