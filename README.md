@@ -1,10 +1,5 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Schenkee/TryHackME-Guides)
-![GitHub last commit](https://img.shields.io/github/last-commit/Schenkee/TryHackMe-Guides)
-[![TryHackMe](https://img.shields.io/badge/TryHackMe-Writeups-red?logo=tryhackme)](https://tryhackme.com)
-[![License](https://img.shields.io/badge/license-Guide--Only-blue)](License)
-
 > 🛡️ A curated collection of TryHackMe walkthroughs focusing on red teaming, web exploitation, and penetration testing fundamentals.
 
 ---
