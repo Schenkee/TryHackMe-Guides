@@ -98,7 +98,6 @@ This will return the below with the required flag for task 3.
 ## 🛠️ TASK 4: Gain RCE in Lab #Playground and find the hostname
 As mentioned in the top summary I will demonstrate two different methods to gain RCE access to this lab one via Metasploit and one by loading a TCP Reverse Shell manually.
 
---
+### 🔥 Metasploit option  
 
-### 🔥 Metasploit option
 
