@@ -146,8 +146,7 @@ Now we can spawn a bash shell and retrieve the flag. Type in ```shell -b``` to s
 ![lab4_flag](./Images/lab4_flag.png)  
 
 ### 👨‍💻 Manual shell option  
-Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly we will need to find a payload to use and my go to is the Reverse TCP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
-Incidentally when you review the Metasploit option you will see that it is also using a reverse TCP payload to perform the attack.
+Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly we will need to find a payload to use and my go to is the Reverse PHP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
 
 Lets open up a blank file on our machine with your preferred text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new black file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
 
