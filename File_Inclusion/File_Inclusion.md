@@ -146,3 +146,5 @@ Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to sp
 ![lab4_flag](./Images/lab4_flag.png)  
 
 ### 👨‍💻 Manual shell option  
+Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly we will need to find a payload to use and my go to is the Reverse TCP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
+Incidentally when you review the Metasploit option you will see that it is also using a reverse TCP payload to perform the attack.
