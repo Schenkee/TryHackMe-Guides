@@ -24,7 +24,7 @@ This guide will cover the steps required to gain the flags to complete the Chall
 ---
 
 ## 🛠️ TASK 1: Capture Flag1 at /etc/flag1
-Navigate to the first task at **http://MACHINE_IP/challenges/chall1.php** Once the page loads we are greeted with a important message to aid us in capturing the flag.  
+Navigate to the first task at ```http://MACHINE_IP/challenges/chall1.php``` Once the page loads we are greeted with a important message to aid us in capturing the flag.  
 The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter! This message gives us a great starting point as we know we need to send a POST request. This can be done in a couple of different manners such as BurpSuite or Curl.
 
 In this instance I will use Curl to generate the POST request and receive the flag. Open up your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
@@ -44,7 +44,7 @@ This will then return a raw response from the web server which will contain our 
 ---
 
 ## 🛠️ TASK 2: Capture Flag2 at /etc/flag2  
-Now lets move onto the second challenge at **http://MACHINE_IP/challenges/chall2.php** This time once the page loads we are greeted with a message asking us to refresh the page.  
+Now lets move onto the second challenge at ```http://MACHINE_IP/challenges/chall2.php``` This time once the page loads we are greeted with a message asking us to refresh the page.  
 Lets refresh as requested and then we are given some more important information as to the likely path for capture the flag. The page reads as below  
 ![lab2_start](./Images/lab2_start.png)  
   
