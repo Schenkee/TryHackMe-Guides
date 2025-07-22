@@ -149,11 +149,10 @@ Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to sp
 Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly we will need to find a payload to use and my go to is the Reverse TCP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
 Incidentally when you review the Metasploit option you will see that it is also using a reverse TCP payload to perform the attack.
 
-Lets open up a blank file on our machine with your prefered text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new black file.  
-One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
+Lets open up a blank file on our machine with your prefered text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new black file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
 
 #### ⚙️ **Options**  
-Find the line starting with ```$ip``` 
+Find the line starting with ```$ip```  
 **$ip** change this to be your attackbox or VM ip address  
 **$port*** Input a selected port that we will use for your listner.  
 
@@ -171,11 +170,11 @@ This should look like the below.
 Now lets setup our listner using netcat. This is where the payload will call back to and spawn our shell.  
 Input ```nc -lnvp 8080``` into your terminal. The port here should match your payload port setup.  
 #### ⚙️ **Options**  
-**-l** Sets netcat into listen mode.
-**-n** Sets netcat to numeric IP address only mode.
-**-v** Sets netcat into verbose mode.
-**-p** Sets the port for netcat
-These can all be combined into the string ```-lnvp``` followed by the required port.
+**-l** Sets netcat into listen mode.  
+**-n** Sets netcat to numeric IP address only mode.  
+**-v** Sets netcat into verbose mode.  
+**-p** Sets the port for netcat  
+These can all be combined into the string ```-lnvp``` followed by the required port.  
 
 This should look as below.  
 ![lab4_netcat](./Images/lab4_netcat.png) 
