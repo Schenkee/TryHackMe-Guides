@@ -134,12 +134,12 @@ Some options are already pre-set with default values. The ones we need to config
 **PHPURI** This sets the point where the payload should be inserted. Input ```?file=XXpathXX```  
 **PATH** This sets the base directory which will be added to the url ```/playground.php```  
 You should end up with a similar setup as below.  
-![lab4_set_options](./Images/lab4_set_options.png)  
+![lab4_set_options](./Images/lab4_mfs_set_options.png)  
 ![lab4_options_set](./Images/lab4_options_set.png)  
 
 Now we and run the exploit be using either ```run``` or ```exploit```  
 If successful we should see a meterpreter session has been created.  
-![lab4_shell_success](./Images_shell_success.png)  
+![lab4_shell_success](./Images/shell_success.png)  
 
 Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrive our flag.  
 ![lab4_flag](./Images/lab4_flag.png)  
