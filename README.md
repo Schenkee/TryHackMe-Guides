@@ -8,7 +8,7 @@
 
 | 🏠 Room Name              | 🎯 Difficulty | 📘 Guide Link                        |
 |---------------------------|----------------|---------------------------------------|
-| File Inclusion            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
+| [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
 | *(More Coming Soon)*      |               |                                       |
 
 ---
