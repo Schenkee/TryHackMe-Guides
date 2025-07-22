@@ -191,3 +191,7 @@ If successful we should se a GET request was recived by our http server.
 
 Our listner should have recived the reverse connetion. If succesful we can see the hosename in the initial connection details or type in ```hostname``` to capture our flag.
 ![lab4_flag_manual](./Images/lab4_flag_manual.png)
+
+---
+
+Thank you for following through my guide of the TryHackMe file Inclusion challage section.
