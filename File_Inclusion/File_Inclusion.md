@@ -144,3 +144,5 @@ If successful we should see a meterpreter session has been created.
 
 Now we can spawn a bash shell and retrive the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrive our flag.  
 ![lab4_flag](./Images/lab4_flag.png)  
+
+### 👨‍💻 Manual shell option  
