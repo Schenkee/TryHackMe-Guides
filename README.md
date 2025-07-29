@@ -9,6 +9,7 @@
 | 🏠 Room Name              | 🎯 Difficulty | 📘 Guide Link                        |
 |---------------------------|----------------|---------------------------------------|
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
+| [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) *In Progress* |  🟡 Medium   | TBA|
 | *(More Coming Soon)*      |               |                                       |
 
 ---
