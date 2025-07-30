@@ -20,7 +20,7 @@ This guide will cover the steps required to gain the answer to all 8 questions i
 
 ---
 
-Firstly lets start our target machine and give it a few minutes to start all relevant services. We can also either the start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  
+Firstly lets start our target machine and give it a few minutes to start all relevant services. We can also either start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  
 
 ---
 
