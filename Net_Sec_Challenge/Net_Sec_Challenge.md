@@ -31,17 +31,26 @@ This can be achived via ```sudo nmap -sS 10.10.79.185 -T5 -p-```
 **-T5** Tells Nmap perform the scan at the fastest level of "Insane" Definatly not recommanded, but works for this case and reduces time.  
 **-p-** Tells Nmap to scan all ports.  
 
-fdsf  
+  
 Once the scan completes we can see details as to the port number, state and service.  
 ![Question 1,2,3.png](./Images/Question%201%2C2%2C3.png)  
+We should now have our answer to question one - the port here is the one running the http-proxy service.  
 
 ---
 
 ## 🛠️ TASK 2: There is an open above 10,000. What is it?  
 
+We can answer this question based on the scan we have already undertaken for question 1.  
+
+The port here is the one listed as having an unknown service.  
+
 ---
 
 ## 🛠️ TASK 3: How many TCP ports are open?  
+
+Again we can answer this question based on the scan we have already undertaken for question 1.  
+
+If the scan has correctly returned all open tcp ports you can count them for the answer to this question.  
 
 ---
 
