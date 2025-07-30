@@ -33,7 +33,8 @@ This can be achived via ```sudo nmap -sS 10.10.79.185 -T5 -p-```
 
 fdsf  
 Once the scan completes we can see details as to the port number, state and service.  
-![Question 1,2,3.png](./Images/Question%201%2C2%2C3.png)
+![Question 1,2,3.png](./Images/Question%201%2C2%2C3.png)  
+
 ---
 
 ## 🛠️ TASK 2: There is an open above 10,000. What is it?  
