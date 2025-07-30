@@ -133,12 +133,13 @@ After a minute or so we should get our results with both passwords found as belo
 ![Question 7 hydra](./Images/Question%207%20hydra.png)  
 
 Now lets see what we can find when loging into these two users ftp accounts. We can connect to the ftp server via ```ftp TARGET_IP PORT``` once connected we can provide the username in the first instance I tried *eddie* which when using ```ls``` to list the contents returned no results.  
-![Question 7 eddie](./Images/Question%207%20eddie.png)  
+![Question 7 eddie](./Images/question%207%20eddie.png)  
 
 Not a problem, lets try login in as *quinn* and see if we have any more luck. After running ```ls``` again when logged in as quinn we can see there is a file called ```ftp_flag.txt``` which is what we are after. Lets download this file to our local machine using ```get ftp_flag.txt``` once downloaded we can enter ```quit``` to discconect the ftp session.  
-![Question 7 eddie](./Images/Question%207%20quinn.png)  
+![Question 7 eddie](./Images/question%207%20quinn.png)  
 
-Now we have the flag file on our system we can use ```cat ftp_flag.txt``` to output the result as below and answer question 7.
+Now we have the flag file on our system we can use ```cat ftp_flag.txt``` to output the result as below and answer question 7.  
+
 ---
 
 ## 🛠️ TASK 8: What is the flag when you solve the challenge?
