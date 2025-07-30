@@ -18,7 +18,7 @@
 
 # 👤 About Me
 
-I'm a cybersecurity learner working through the various different practical hands on guides and creating walk throughs of labs I find interesting and helpful to demonstrate my learned skills.  
+I'm a cybersecurity learner working through various practical hands-on labs primarily on TryHackMe at the moment and creating walk throughs of labs I find interesting and helpful to demonstrate my learned skills.  
 🔗 [TryHackMe Profile](https://tryhackme.com/p/schenkee)  
 
 ---
