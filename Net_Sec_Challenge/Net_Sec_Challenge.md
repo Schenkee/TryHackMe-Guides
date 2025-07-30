@@ -9,30 +9,30 @@
 ## 🧩 Challenge Task Overview
 
 **Objective:**   
-This guide will cover the steps required to gain the answer to all 8 questions in this challange room, focused on the skills obtained via the Network Security module.  
+This guide will cover the steps required to gain the answer to all 8 questions in this challenge room, focused on the skills obtained via the Network Security module.  
 
 ---
 
 ## 🧰 Tools I Used  
 - Nmap  
 - Telnet  
-- Hyrda  
+- Hydra  
 
 ---
 
 ## 🛠️ TASK 1: What is the highest port number being open less than 10,000?  
 
-The first few questions will all focus on basic nmap scans of the target. We can get the answers to all 3 of the first question in one scan. It is worth to not that by default nmap will scan the most common 1,000 ports for each protocol. This does not mean it will scan ports 0-1000 but the most common 1,000 ports in use. As question 2 asks for the port open above 10,000 we can just do a full port scan from 0 to 65,535 to get underway.
+The first few questions will all focus on basic nmap scans of the target. We can get the answers to all 3 of the first question in one scan. It is worth to not that by default nmap will scan the most common 1,000 ports for each protocol. This does not mean it will scan ports 0-1000 but the most common 1,000 ports in use. As question 2 asks for the port open above 10,000, we can just do a full port scan from 0 to 65,535 to get underway.
 
-This can be achived via ```sudo nmap -sS TARGET_IP -T5 -p-```  
+This can be achieved via ```sudo nmap -sS TARGET_IP -T5 -p-```  
 #### ⚙️ **Options**  
-**sudo** We need to run this command as a privilged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
+**sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
 **-sS** Tells Nmap to perform a TCP SYN Scan.  
-**-T5** Tells Nmap perform the scan at the fastest level of "Insane" Definatly not recommanded, but works for this case and reduces time.  
+**-T5** Tells Nmap perform the scan at the fastest level of "Insane" Definitely not recommended but works for this case and reduces time.  
 **-p-** Tells Nmap to scan all ports.  
 
   
-Once the scan completes we can see details as to the port number, state and service.  
+Once the scan completes, we can see details as to the port number, state and service.  
 ![Question 1,2,3](./Images/Question%201%2C2%2C3.png)  
 We should now have our answer to question one - the port here is the one running the http-proxy service.  
 
@@ -48,7 +48,7 @@ The port here is the one listed as having an unknown service.
 
 ## 🛠️ TASK 3: How many TCP ports are open?  
 
-Again we can answer this question based on the scan we have already undertaken for question 1.  
+Again, we can answer this question based on the scan we have already undertaken for question 1.  
 
 If the scan has correctly returned all open tcp ports you can count them for the answer to this question.  
 
@@ -56,13 +56,13 @@ If the scan has correctly returned all open tcp ports you can count them for the
 
 ## 🛠️ TASK 4: What is the flag hidden in the HTTP server header?  
 
-As was demonstarted during the Network Security Module we can use Telnet to connect to different protocols to try and grab some basic information. This is what we shall do in this instance.
+As was demonstrated during the Network Security Module we can use Telnet to connect to different protocols to try and grab some basic information. This is what we shall do in this instance.
 
-By using the following command ```telnet TARGET_IP 80``` we attempt to make a telnet connect to port 80 which we seen above was running a http server.  
+By using the following command ```telnet TARGET_IP 80``` we attempt to make a telnet connect to port 80 which we have seen above was running a http server.  
 Once connected to the HTTP server we can proceed with the below commands to see if we can find the flag in the HTTP header.  
 ```GET / HTTP/1/1```  
 Hit Enter.  
-```host: test``` - we need to provide a host: in the GET request we are passing to the server to avoid reciving an error.  
+```host: test``` - we need to provide a host: in the GET request we are passing to the server to avoid receiving an error.  
 Hit Enter.  
 
 This should now return you the below information, which we can see contains for flag to answer question 4.  
