@@ -85,6 +85,20 @@ This should then return you a simple one-line response which contains the flag t
 
 ---
 
+## 🔄 Altervative methoed for Task 4 and 5.  
+
+We can also get the flags for question 4 and 5 using the default scripts in nmap.  
+Using ```nmap -sV -sC 10.10.51.106```  
+
+#### ⚙️ **Options**  
+**-sV** Tells nmap to perform service version detection which will aid in being able to run scripts.  
+**-sC** Tells nmap to run the default scripts against the relevant services.  
+
+This will then return the below, where we can see our flag for question 4 under the red box and our flag for question 5 twice under the ornage box.  
+
+---
+
+
 ## 🛠️ TASK 6: What is the version of the FTP server?  
 
 ---
