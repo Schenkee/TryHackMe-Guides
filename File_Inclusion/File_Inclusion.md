@@ -22,6 +22,10 @@ This guide will cover the steps required to gain the flags to complete the Chall
 
 ---
 
+Firstly lets start our target machine and give it a few minutes to start all relevant services. We can also either the start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  
+
+---
+
 ## 🛠️ TASK 1: Capture Flag1 at /etc/flag1
 Navigate to the first task at ```http://MACHINE_IP/challenges/chall1.php``` Once the page loads, we are greeted with an important message to aid us in capturing the flag.  
 The page reads "The Input form is broken! You need to send **'POST'** request with **'file'** parameter! This message gives us a great starting point as we know we need to send a POST request. This can be done in a couple of different manners such as BurpSuite or Curl.
