@@ -135,13 +135,24 @@ After a minute or so we should get our results with both passwords found as belo
 Now lets see what we can find when loging into these two users ftp accounts. We can connect to the ftp server via ```ftp TARGET_IP PORT``` once connected we can provide the username in the first instance I tried *eddie* which when using ```ls``` to list the contents returned no results.  
 ![Question 7 eddie](./Images/question%207%20eddie.png)  
 
-Not a problem, lets try login in as *quinn* and see if we have any more luck. After running ```ls``` again when logged in as quinn we can see there is a file called ```ftp_flag.txt``` which is what we are after. Lets download this file to our local machine using ```get ftp_flag.txt``` once downloaded we can enter ```quit``` to discconect the ftp session.  
-![Question 7 eddie](./Images/question%207%20quinn.png)  
+Not a problem, lets try login in as *quinn* and see if we have any more luck. After running ```ls``` again when logged in as *quinn* we can see there is a file called ```ftp_flag.txt``` which is what we are after. Lets download this file to our local machine using ```get ftp_flag.txt``` once downloaded we can enter ```quit``` to discconect the ftp session.  
+![Question 7 quinn](./Images/question%207%20quinn.png)  
 
 Now we have the flag file on our system we can use ```cat ftp_flag.txt``` to output the result as below and answer question 7.  
+![Question 7 flag](./Images/question%207%20flag.png)  
 
 ---
 
 ## 🛠️ TASK 8: What is the flag when you solve the challenge?
+
+For the final question we need to open our web browser via ```http://MACHINE_IP:8080``` which will present us with a little challenge to perform a scan without being detected by the IDS.  
+
+I found this to be abit buggy and had to close and open the page each time between scans if I was detected. Refreshing did not seem to reset the tool. After a couple of different scans I manage to get the flag using a nmap Null Scan.    
+
+We can perform an nmap Null Scan using ```sudo nmap -sN TARGET_IP``` as below.   
+![Question 8 scan](./Images/Question%208%20scan.png)   
+
+If succesful the web browser should pop up a new message saying *Exercise Complete!* along with the flag.  
+![Question 8 scan](./Images/Question%208%20flag.png)  
 
 ---
