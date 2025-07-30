@@ -20,6 +20,8 @@ This guide will cover the steps required to gain the answer to all 8 questions i
 
 ---
 
+Firstly lets start our target machine and give it a few minutes to start all relevant services.We can also either the start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  
+
 ## 🛠️ TASK 1: What is the highest port number being open less than 10,000?  
 
 The first few questions will all focus on basic nmap scans of the target. We can get the answers to all 3 of the first question in one scan. It is worth to not that by default nmap will scan the most common 1,000 ports for each protocol. This does not mean it will scan ports 0-1000 but the most common 1,000 ports in use. As question 2 asks for the port open above 10,000, we can just do a full port scan from 0 to 65,535 to get underway.
