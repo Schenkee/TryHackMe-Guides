@@ -94,7 +94,8 @@ Using ```nmap -sV -sC 10.10.51.106```
 **-sV** Tells nmap to perform service version detection which will aid in being able to run scripts.  
 **-sC** Tells nmap to run the default scripts against the relevant services.  
 
-This will then return the below, where we can see our flag for question 4 under the red box and our flag for question 5 twice under the ornage box.  
+This will then return the below, where we can see our flag for question 4 under the red box and our flag for question 5 twice under orange box.  
+
 
 ---
 
