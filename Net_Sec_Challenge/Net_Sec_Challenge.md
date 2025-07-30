@@ -66,7 +66,7 @@ By using the following command ```telnet TARGET_IP 80``` we attempt to make a te
 Once connected to the HTTP server we can proceed with the below commands to see if we can find the flag in the HTTP header.  
 ```GET / HTTP/1/1```  
 Hit Enter.  
-```host: test``` - we need to provide a host: in the GET request we are passing to the server to avoid receiving an error.  
+```host: test``` we need to provide a host: in the GET request we are passing to the server to avoid receiving an error.  
 Hit Enter.  
 
 This should now return you the below information, which we can see contains for flag to answer question 4.  
