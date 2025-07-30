@@ -72,6 +72,13 @@ This should now return you the below information, which we can see contains for 
 
 ## 🛠️ TASK 5: What is the flag hidden in the SSH server header?  
 
+We will once again utilise Telnet to attempt a connection to the SSH server and see if we can get the flag in the header.  
+
+Connect via ```telnet TARGET_IP 22``` to initiate the telnet connection to the default SSH port of 22, which we also found in our initial scan.  
+
+This should then return you a simple one-line response which contains the flag to answer question 5.  
+![Question 5](./Images/Question%205.png)  
+
 ---
 
 ## 🛠️ TASK 6: What is the version of the FTP server?  
