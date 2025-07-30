@@ -88,8 +88,7 @@ This should then return you a simple one-line response which contains the flag t
 ## 🔄 Altervative methoed for Task 4 and 5.  
 
 We can also get the flags for question 4 and 5 using the default scripts in nmap.  
-Using ```nmap -sV -sC 10.10.51.106```  
-
+Using ```nmap -sV -sC TARGET_IP```  
 #### ⚙️ **Options**  
 **-sV** Tells nmap to perform service version detection which will aid in being able to run scripts.  
 **-sC** Tells nmap to run the default scripts against the relevant services.  
@@ -97,15 +96,41 @@ Using ```nmap -sV -sC 10.10.51.106```
 This will then return the below, where we can see our flag for question 4 under the red box and our flag for question 5 twice under orange box.  
 ![Question 4,5 alt](./Images/Qeustion%204%2C5%20alt.png)  
 
-
 ---
 
 
 ## 🛠️ TASK 6: What is the version of the FTP server?  
+For this task we can use nmaps service version detection option to find our answer.
+This is done via ```nmap -sV TARGET_IP -p PORT```  
+#### ⚙️ **Options**  
+**-sV** Tells nmap to perform service version detection.  
+**-p** Tells nmap to only scan the specified port or ports.  
+
+This should return the below information for the non standard port running the ftp service.  
+![Question 6](./Images/Question%206.png)  
 
 ---
 
 ## 🛠️ TASK 7: What is the flag hidden in one of these two account files and accessible via FTP?  
+
+For this question we are tasked with loging into the ftp service via one of the two provided usernames. The names provided are *eddie* and *quinn*.  For this task we will use Hydra to discover the passwords, as we have two usernames we could run hydra twice against each user, or as in this case we can make a little wordlist with our usernames.  
+
+To make this userlist we can use ```echo -e "eddie\nquinn" > usernames.txt``` this will pop eddie and quinn int a file called usernames.txt with each name on a seperate line.  
+#### ⚙️ **Options**  
+**-e** Enables the interpretation of backslash escape characters. This tells echo to interperate \n as newline.  
+
+We should end up with the below.  
+![Question 7 username list](./Images/Quesiton%207%20username%20list.png)  
+
+Now we can enter this list into Hydra to perform our attack on the ftp server.  
+We will use ```hydra -L usernames.txt -P /usr/share/wordlists/rockyou.txt ftp://TARGET_IP -s PORT```  
+#### ⚙️ **Options**  
+**-L** Provides hydra with the location of the username list.  
+**-P** Provides hydra with the location of the password list.
+**-s** Sets the port for hydra to use. 
+
+After a minute or so we should get our results with both passwords found as below.  
+![Question 7 hydra](./Images/Question%207%20hydra.png)  
 
 ---
 
