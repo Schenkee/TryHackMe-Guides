@@ -115,7 +115,7 @@ This should return the below information for the nonstandard port running the ft
 
 For this question we are tasked with logging into the ftp service via one of the two provided usernames. The names provided are *eddie* and *quinn*.  For this task we will use Hydra to discover the passwords, as we have two usernames we could run hydra twice against each user, or as in this case we can make a little wordlist with our usernames.  
 
-To make this user list we can use ```echo -e "eddie\nquinn" > usernames.txt``` this will pop eddie and quinn int a file called usernames.txt with each name on a separate line.  
+To make this user list we can use ```echo -e "eddie\nquinn" > usernames.txt``` this will pop eddie and quinn into a file called usernames.txt with each name on a separate line.  
 #### ⚙️ **Options**  
 **-e** Enables the interpretation of backslash escape characters. This tells echo to interpret \n as newline.  
 
