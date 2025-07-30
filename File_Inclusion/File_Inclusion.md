@@ -14,7 +14,6 @@ This guide will cover the steps required to gain the flags to complete the Chall
 ---
 
 ## 🧰 Tools I Used
-- Kali Linux
 - Metasploit
 - Curl
 - Python3 http server
