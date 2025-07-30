@@ -156,3 +156,5 @@ If succesful the web browser should pop up a new message saying *Exercise Comple
 ![Question 8 scan](./Images/Question%208%20flag.png)  
 
 ---
+
+Thank you for following through my guide of the TryHackMe Net Sec Challenge.
