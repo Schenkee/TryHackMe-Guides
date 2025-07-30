@@ -95,6 +95,7 @@ Using ```nmap -sV -sC 10.10.51.106```
 **-sC** Tells nmap to run the default scripts against the relevant services.  
 
 This will then return the below, where we can see our flag for question 4 under the red box and our flag for question 5 twice under orange box.  
+![Question 4,5 alt](./Images/Qeustion%204%2C5%20alt.png)  
 
 
 ---
