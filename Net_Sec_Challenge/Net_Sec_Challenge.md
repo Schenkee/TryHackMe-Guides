@@ -85,7 +85,7 @@ This should then return you a simple one-line response which contains the flag t
 
 ---
 
-## 🔄 Altervative methoed for Task 4 and 5.  
+## 🔄 Alterative method for Task 4 and 5.  
 
 We can also get the flags for question 4 and 5 using the default scripts in nmap.  
 Using ```nmap -sV -sC TARGET_IP```  
@@ -100,24 +100,24 @@ This will then return the below, where we can see our flag for question 4 under 
 
 
 ## 🛠️ TASK 6: What is the version of the FTP server?  
-For this task we can use nmaps service version detection option to find our answer.
+For this task we can use the service version detection option in nmap to find our answer.
 This is done via ```nmap -sV TARGET_IP -p PORT```  
 #### ⚙️ **Options**  
 **-sV** Tells nmap to perform service version detection.  
 **-p** Tells nmap to only scan the specified port or ports.  
 
-This should return the below information for the non standard port running the ftp service.  
+This should return the below information for the nonstandard port running the ftp service.  
 ![Question 6](./Images/Question%206.png)  
 
 ---
 
 ## 🛠️ TASK 7: What is the flag hidden in one of these two account files and accessible via FTP?  
 
-For this question we are tasked with loging into the ftp service via one of the two provided usernames. The names provided are *eddie* and *quinn*.  For this task we will use Hydra to discover the passwords, as we have two usernames we could run hydra twice against each user, or as in this case we can make a little wordlist with our usernames.  
+For this question we are tasked with logging into the ftp service via one of the two provided usernames. The names provided are *eddie* and *quinn*.  For this task we will use Hydra to discover the passwords, as we have two usernames we could run hydra twice against each user, or as in this case we can make a little wordlist with our usernames.  
 
-To make this userlist we can use ```echo -e "eddie\nquinn" > usernames.txt``` this will pop eddie and quinn int a file called usernames.txt with each name on a seperate line.  
+To make this user list we can use ```echo -e "eddie\nquinn" > usernames.txt``` this will pop eddie and quinn int a file called usernames.txt with each name on a separate line.  
 #### ⚙️ **Options**  
-**-e** Enables the interpretation of backslash escape characters. This tells echo to interperate \n as newline.  
+**-e** Enables the interpretation of backslash escape characters. This tells echo to interpret \n as newline.  
 
 We should end up with the below.  
 ![Question 7 username list](./Images/Quesiton%207%20username%20list.png)  
@@ -132,10 +132,10 @@ We will use ```hydra -L usernames.txt -P /usr/share/wordlists/rockyou.txt ftp://
 After a minute or so we should get our results with both passwords found as below.  
 ![Question 7 hydra](./Images/Question%207%20hydra.png)  
 
-Now lets see what we can find when loging into these two users ftp accounts. We can connect to the ftp server via ```ftp TARGET_IP PORT``` once connected we can provide the username in the first instance I tried *eddie* which when using ```ls``` to list the contents returned no results.  
+Now let’s see what we can find when logging into these two users ftp accounts. We can connect to the ftp server via ```ftp TARGET_IP PORT``` once connected we can provide the username in the first instance I tried *eddie* which when using ```ls``` to list the contents returned no results.  
 ![Question 7 eddie](./Images/question%207%20eddie.png)  
 
-Not a problem, lets try login in as *quinn* and see if we have any more luck. After running ```ls``` again when logged in as *quinn* we can see there is a file called ```ftp_flag.txt``` which is what we are after. Lets download this file to our local machine using ```get ftp_flag.txt``` once downloaded we can enter ```quit``` to discconect the ftp session.  
+Not a problem, let’s try login in as *quinn* and see if we have any more luck. After running ```ls``` again when logged in as *quinn* we can see there is a file called ```ftp_flag.txt``` which is what we are after. Let’s download this file to our local machine using ```get ftp_flag.txt``` once downloaded we can enter ```quit``` to disconnect the ftp session.  
 ![Question 7 quinn](./Images/question%207%20quinn.png)  
 
 Now we have the flag file on our system we can use ```cat ftp_flag.txt``` to output the result as below and answer question 7.  
@@ -147,12 +147,12 @@ Now we have the flag file on our system we can use ```cat ftp_flag.txt``` to out
 
 For the final question we need to open our web browser via ```http://MACHINE_IP:8080``` which will present us with a little challenge to perform a scan without being detected by the IDS.  
 
-I found this to be abit buggy and had to close and open the page each time between scans if I was detected. Refreshing did not seem to reset the tool. After a couple of different scans I manage to get the flag using a nmap Null Scan.    
+I found this to be buggy and had to close and open the page each time between scans if I was detected. Refreshing did not seem to reset the tool. After a couple of different scans, I manage to get the flag using a nmap Null Scan.    
 
-We can perform an nmap Null Scan using ```sudo nmap -sN TARGET_IP``` as below.   
+We can perform a nmap Null Scan using ```sudo nmap -sN TARGET_IP``` as below.   
 ![Question 8 scan](./Images/Question%208%20scan.png)   
 
-If succesful the web browser should pop up a new message saying *Exercise Complete!* along with the flag.  
+If successful, the web browser should pop up a new message saying *Exercise Complete!* along with the flag.  
 ![Question 8 scan](./Images/Question%208%20flag.png)  
 
 ---
