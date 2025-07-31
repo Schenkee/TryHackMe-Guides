@@ -196,4 +196,14 @@ Our listener should have received the reverse connection. If successful we can s
 
 ---
 
+## 🧠 Takeaways
+
+- Practiced exploiting file inclusion vulnerabilities via both URL and cookie inputs.  
+- Learned how to bypass default filters by using POST requests and null-byte injection (```%00```).  
+- Built familiarity with RFI attacks, hosting malicious payloads, and remote code execution.  
+- Built on learned approach to methodical input manipulation that’s essential in web security testing.  
+- Reinforced understanding of why input validation, sanitization, and safe configuration are critical for secure web applications.
+
+---
+
 Thank you for following through my guide of the TryHackMe file Inclusion challenge section.
