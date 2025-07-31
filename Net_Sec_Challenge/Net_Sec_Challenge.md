@@ -157,4 +157,14 @@ If successful, the web browser should pop up a new message saying *Exercise Comp
 
 ---
 
+## 🧠 Takeaways
+
+- Practiced identifying open ports with ```nmap```, using various scan types and parameters.   
+- Learned to extract banner information from services like SSH and HTTP, via different methods.  
+- Used ```Hydra``` to brute-force FTP credentials on a non-standard port.  
+- Discovered how stealth scans like ```-sN``` can bypass detection and trigger unique behaviours.  
+- Reinforced methodical enumeration skills that were learnt during the Network Security module and how they apply to real-world penetration testing scenarios.  
+
+---
+
 Thank you for following through my guide of the TryHackMe Net Sec Challenge.
