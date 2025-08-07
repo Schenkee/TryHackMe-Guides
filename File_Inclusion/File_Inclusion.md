@@ -127,6 +127,7 @@ This confirms there is a RFI vulnerability which we can exploit to gain RCE acce
 For this method we will use the PHP_Include metasploit module to gain RCE access.  
 Open up metasploit using ```mfsconsole```  
 Once Metasploit has started we will load our module using ```use exploit/unix/webapp/php_include```  
+This will default set our payload to a php/meterpreter/reverse_tcp which will be sufficient for our use case.  
 Next type in ```show options``` which will bring up the different payload options. We will need to configure some options to enable this attack.  
 ![lab4_mfs_options](./Images/lab4_mfs_options.png)  
 
