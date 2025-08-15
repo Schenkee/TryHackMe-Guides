@@ -1,6 +1,6 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-> 🛡️ A curated collection of TryHackMe walkthroughs focusing on red teaming, web exploitation, and penetration testing fundamentals.
+> 🛡️ A curated collection of TryHackMe walkthroughs focusing on red teaming, web exploitation, and penetration testing fundamentals. Walkthroughs added as and when I progress through rooms that I find interesting and worthwhile to write up to provide guidance and demonstrated skills.  
 
 ---
 
@@ -11,6 +11,7 @@
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
 | [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)|
 | [Vulnerability Capstone](https://tryhackme.com/room/vulnerabilitycapstone)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Vulnerability_Capstone/Vulnerability_Capstone.md) |  
+| [Blue](https://tryhackme.com/room/blue) In Progress | 🟢 Easy | TBA|  
 | *(More Coming Soon)*      |               |                                       |
   
 *Difficulty as per TryHackMe
