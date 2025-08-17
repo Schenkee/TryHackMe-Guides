@@ -20,7 +20,7 @@ This guide will cover the steps required to gain the answer to all question in t
 
 ---
 
-Firstly, let’s start our target machine and give it a few minutes to start all relevant services. I using the TryHackME AttackBox lets start this up aswell, or alternativly as in my case connect to the TryHackMe VPN to use your own attacking machine.
+Firstly, let’s start our target machine and give it a few minutes to start all relevant services. I using the TryHackME AttackBox lets start this up aswell, or alternativly as in my case connect to the TryHackMe VPN to use your own attacking machine. You can even download the VM for offline usage if required.
 
 ---
 
