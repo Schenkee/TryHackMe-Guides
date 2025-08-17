@@ -31,8 +31,8 @@ We will run nmap via the following ```sudo nmap -sS TARGET_IP```
 **sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
 **-sS** Tells Nmap to perform a TCP SYN Scan.  
 
-This should return the below information.
-![Recon - Nmap](./Images/Recon%20-%20Nmap.png)
+This should return the below information.  
+![Recon - Nmap](./Images/Recon%20-%20Nmap.png)  
 This will give us enough information to answer the first question: How many ports are open with a port number under 1000?  
 
 
