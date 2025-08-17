@@ -43,10 +43,10 @@ We can run a nmap version scan and default scripts against the target port to se
 This can be done via ```sudo nmap -sS -sV -sC TARGET_IP -p 445```
 #### ⚙️ **Options**  
 **sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
-**-sS** Tells Nmap to perform a TCP SYN Scan. 
-**-sV** Tells Nmap to perform a version scan to detect service versions on each port.
-**-sC** Tells Nmap to perform run default scripts on the target.  
-**-p** Tells nmap which port to scan. In this case we only need to scan port 445  
+**-sS** Tells Nmap to perform a TCP SYN Scan.   
+**-sV** Tells Nmap to perform a version scan to detect service versions on each port.  
+**-sC** Tells Nmap to perform run default scripts on the target.    
+**-p** Tells nmap which port to scan. In this case we only need to scan port 445    
 
 This should result in the below output.  
 ![Recond - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)  
