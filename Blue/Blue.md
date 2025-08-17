@@ -54,7 +54,7 @@ Lets do a google search for any vulnerabilities which might be effecting smb on 
 ![Recond - Google](./Images/Recon%20-%20Google.png)  
 We can also see some results returned on ExploitDB  
 ![Recond - ExploitDB](./Images/Recon%20-%20ExploitDB.png)  
-This provides us the answer to the bext question: ***What is this machine vulnerable to?***  
+This provides us the answer to the next and final question for the Recon section: ***What is this machine vulnerable to?***  
 
 ---
 
