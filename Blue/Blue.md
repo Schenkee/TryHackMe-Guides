@@ -33,8 +33,28 @@ We will run nmap via the following ```sudo nmap -sS TARGET_IP```
 
 This should return the below information.  
 ![Recon - Nmap](./Images/Recon%20-%20Nmap.png)  
-This will give us enough information to answer the first question: How many ports are open with a port number under 1000?  
+This will give us enough information to answer the first question: **How many ports are open with a port number under 1000?**  
 
+Now we can see that port 445 is open which is the default port used for Server Message Block (SMB) protocol. SMB is the protocol which is vulnerable to Eternal Blue in certain windows versions. But lets run another Nmap scan to see if we cannot find anything further to verify that this port is indeed vulnerable.  
+
+We can run a nmap version scan and also Nmaps default scripts against the target port to see if we can return any further useful information.
+This can be done via ```sudo nmap -sS -sV -sV TARGET_IP -p 445```
+#### ⚙️ **Options**  
+**sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
+**-sS** Tells Nmap to perform a TCP SYN Scan. 
+**-sV** Tells Nmap to perform a version scan to detect service versions on each port.
+**-sC** Tells Nmap to perform run default scripts on the target.  
+**-p** Tells nmap which port to scan. In this case we only need to scan port 445  
+
+This should result in the below output.  
+![Recond - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)
+This has returned some very good information naimly the OS details. We can see that the system is running ***Windows 7 Professional 7601 Service Pack 1***
+
+Lets do a google search for any vulnerabilities which might be effecting smb on ***Windows 7 Professional 7601 Service Pack 1*** and as we might be expected we get some good results back confirming that our target is vulnerable to CVE-2017-0144 Eternal Blue.  
+![Recond - Google](./Images/Recon%20-%20Google.png)  
+We can also see some results returned on ExploitDB  
+![Recond - ExploitDB](./Images/Recon%20-%20ExploitDB.png)  
+This provides us the answer to the bext question: ***What is this machine vulnerable to?***  
 
 ---
 
