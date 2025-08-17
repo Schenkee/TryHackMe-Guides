@@ -25,6 +25,15 @@ Firstly, let’s start our target machine and give it a few minutes to start all
 ---
 
 ## 🛠️ Recon: 
+First let us start with a straight forward nmap scan to see which ports are open and what possible path we have into the target machine.  
+We will run nmap via the following ```sudo nmap -sS TARGET_IP```   
+#### ⚙️ **Options**  
+**sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
+**-sS** Tells Nmap to perform a TCP SYN Scan.  
+
+This should return the below information.
+![Recon - Nmap](./Images/Recon%20-%20Nmap.png)
+This will give us enough information to answer the first question: How many ports are open with a port number under 1000?  
 
 
 ---
