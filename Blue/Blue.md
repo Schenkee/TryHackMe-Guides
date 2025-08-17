@@ -47,7 +47,7 @@ This can be done via ```sudo nmap -sS -sV -sV TARGET_IP -p 445```
 **-p** Tells nmap which port to scan. In this case we only need to scan port 445  
 
 This should result in the below output.  
-![Recond - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)
+![Recond - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)  
 This has returned some very good information naimly the OS details. We can see that the system is running ***Windows 7 Professional 7601 Service Pack 1***
 
 Lets do a google search for any vulnerabilities which might be effecting smb on ***Windows 7 Professional 7601 Service Pack 1*** and as we might be expected we get some good results back confirming that our target is vulnerable to CVE-2017-0144 Eternal Blue.  
