@@ -26,6 +26,7 @@ Firstly, let’s start our target machine and give it a few minutes to start all
 
 ## 🛠️ Recon: 
 First let us start with a straight forward nmap scan to see which ports are open and what possible path we have into the target machine.  
+
 We will run nmap via the following ```sudo nmap -sS TARGET_IP```   
 #### ⚙️ **Options**  
 **sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
@@ -37,7 +38,8 @@ This will give us enough information to answer the first question: **How many po
 
 Now we can see that port 445 is open which is the default port used for Server Message Block (SMB) protocol. SMB is the protocol which is vulnerable to Eternal Blue in certain windows versions. But lets run another Nmap scan to see if we cannot find anything further to verify that this port is indeed vulnerable.  
 
-We can run a nmap version scan and default scripts against the target port to see if we can return any further useful information.
+We can run a nmap version scan and default scripts against the target port to see if we can return any further useful information.  
+
 This can be done via ```sudo nmap -sS -sV -sV TARGET_IP -p 445```
 #### ⚙️ **Options**  
 **sudo** We need to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
