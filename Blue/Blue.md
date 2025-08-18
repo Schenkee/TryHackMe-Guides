@@ -85,9 +85,12 @@ Do this via the following commands
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
 Now we can view our options again via ```show options``` and confirm our remote and local host IP's are correct and that our payload has been adjusted as required.  
-![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)
+![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)  
 
+Once everything is set we can type in ```run``` or ```exploit``` to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
+![Gain Access - Esxploit](./Images/Gain%20Access%20-%20Exploit.png)  
 
+Lastly we can now background this session via ```CTRL + Z``` to proceed onto the next phase of the attack where we will esclate our shell to a meterpreter session.  
 
 
 ---
