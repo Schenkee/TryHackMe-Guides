@@ -9,7 +9,7 @@
 ## 🧩 Challenge Task Overview
 
 **Objective:**   
-This guide will cover the steps required to gain the answer to all question in the Blue room which focuses on the Eternal Blue vulnerability in SMB and is the conclusion to the Metasploit module. 
+This guide will cover the steps required to gain the answer to all question in the Blue room which focuses on the EternalBlue vulnerability in SMB and is the conclusion to the Metasploit module. 
 
 ---
 
@@ -65,15 +65,15 @@ This concludes our required Reconnisance for the room and we can now move on to 
 ## 🛠️ Gain Access: 
 In the Recon section we identified that the target machine is vulnerable to MS17_010 aka EternalBlue. 
 
-So lets start up Metasploit using ```msfconsole```  
+So, let’s start up Metasploit using ```msfconsole```  
 
-Now lets see if there are any relevant modules avaible to us via ```search ms17-010``` this will bring back the below results.  
+Now let’s see if there are any relevant modules available to us via ```search ms17-010``` this will bring back the below results.  
 ![Gain Access - search](./Images/Gain%20Access%20-%20search.png)  
 In this instance we can use the first result, to load this module type ```use 0```  
 
 This will also now provide us with the answer to our first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
-Now that we have loaded this module we will need to configure a couple of items. Firstly lets view our options via ```show options```  
+Now that we have loaded this module we will need to configure a couple of items. Firstly, lets view our options via ```show options```  
 ![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
 The items we will need to change are **RHOSTS**, **LHOST** and the **Payload**  Noting that only the **RHOSTS** is empty and required to be set for the module. The **LHOST** is part of the payload options.  
 
@@ -84,14 +84,16 @@ Do this via the following commands
 
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
-Now we can view our options again via ```show options``` and confirm our remote and local host IP's are correct and that our payload has been adjusted as required.  
+Now we can view our options again via ```show options``` and confirm our remote and local host IPs are correct and that our payload has been adjusted as required.  
 ![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)  
 
-Once everything is set we can type in ```run``` or ```exploit``` to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
+Once everything is set, we can type in ```run``` or ```exploit``` to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
 ![Gain Access - Esxploit](./Images/Gain%20Access%20-%20Exploit.png)  
 
-Lastly we can now background this session via ```CTRL + Z``` to proceed onto the next phase of the attack where we will esclate our shell to a meterpreter session.  
+Lastly, we can now background this session via ```CTRL + Z``` to proceed onto the next phase of the attack where we will escalate our shell to a meterpreter session.  
 
+To confirm the session has been backgrounded and is still active we can type in ```sessions -i``` into the main msfconsole.  
+![Gain Access - Background](./Images/Gain%20Access%20-%20Background.png)  
 
 ---
 
