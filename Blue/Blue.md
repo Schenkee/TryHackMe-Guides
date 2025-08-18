@@ -58,10 +58,20 @@ We can also see some results returned on ExploitDB
 ![Recond - ExploitDB](./Images/Recon%20-%20ExploitDB.png)  
 This provides us the answer to the next and final question for the Recon section: ***What is this machine vulnerable to?***  
 
+This concludes our required Reconnisance for the room and we can now move on to gain access to the target machine.
+
 ---
 
 ## 🛠️ Gain Access: 
+In the Recon section we identified that the target machine is vulnerable to MS17_010 aka EternalBlue. 
 
+So lets start up Metasploit using ```msfconsole```  
+
+Now lets see if there are any relevant modules avaible to us via ```search ms17-010``` this will bring back the below results.  
+![Gain Access - search](./Images/Gain%20Access%20-%20search.png)  
+In this instance we can use the first result, to load this module type ```use 0```  
+
+This will also now provide us with the answer to our first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
 ---
 
