@@ -1,6 +1,6 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-> 🛡️ A curated collection of TryHackMe walkthroughs focusing on red teaming, web exploitation, and penetration testing fundamentals. Walkthroughs added as and when I progress through rooms that I find interesting and worthwhile to write up to provide guidance and demonstrated skills.  
+> 🛡️ A curated collection of TryHackMe walkthroughs highlighting Blue Team and SOC/DFIR skills, alongside penetration testing and red team fundamentals. New walkthroughs are added as I complete rooms that offer valuable learning and skill demonstration.  
 
 ---
 
