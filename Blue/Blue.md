@@ -111,6 +111,21 @@ This will also provide you the answer to the next question: **Show options, what
 To set this option input ```set session SESSION_NUMBER``` you can view the your active sessions via ```sessions -i``` and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
 ![Escalate - Meterpreter Options set](./Images/Escalate%20-%20Meterpreter%20Options%20set.png)  
 
+Once the options have been set input ```run``` to start the module and if all has worked after a minute or so you should have an active meterpreter session.  
+This can be confirmed with ```sessions -i``` where there should now be two active sessions on the target.  
+![Escalate Meterpreter sessions](./Images/Escalate%20Meterpreter%20sessions.png)
+
+Now follow the guide and confirm the session is running as **SYSTEM** via the ```getsystem``` command and as below it is confirmed the session is already running as **SYSTEM**
+![Escalate - System command](./Images/Escalate%20-%20System%20command.png)
+
+Lastly the guide mentions to migrate to a different process ID. Firstly input ```ps``` to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
+
+It is also worth to check which process the session is actually running as which can be done via ```getpid``` this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. But for the sake of following the guide lets migrate to a different process using ```migrate PID``` 
+![Escalate - Pid and Migrate](./Images/Escalate%20-%20Pid%20and%20Migrate.png)  
+This may sometimes return errors in which case try a different pid.
+
+Now we have gained access to the target machine and escalated to a meterpreter session, its time to get some information out of the system.
+
 ---
 
 ## 🛠️ Cracking: 
