@@ -130,6 +130,29 @@ Now we have gained access to the target machine and escalated to a meterpreter s
 
 ## 🛠️ Cracking: 
 
+Let's proceed by first dumping the hashes of our target machines user passwords. This can be done with a meterpreter command ```hashdump```  
+
+This might take a minute but once completed will dump the username and has details in the terminal.  
+![Cracking - Hashdump](./Images/Cracking%20-%20Hashdump.png)  
+This will provide the details to asnwer the first question of this section: **What is the name of the non-default user?**  
+
+Now open up a text file on the attacking machine with your prefered text editor and paste in the final portion **Jon's** password hash as below.  
+![Cracking - jon.txt](./Images/Cracking%20-%20jon.txt.png)  
+
+Once you have saved this file we can use **Hashcat** to crack this.  
+
+Use the following command ```hashcat -m 1000 -a 0 HASH_FILE /LOCATION_OF_PASSWORD_LIST``` 
+#### ⚙️ **Options**  
+**-m** Is used to identify the hash type. More details can be found here [https://hashcat.net/wiki/doku.php?id=example_hashes](https://hashcat.net/wiki/doku.php?id=example_hashes) In this case we know its a windows hash so NTLM which is code 1000.  
+**-a** This specifies the attackmode to be used. In this instance attackmode 0 - Dictionary Attack.  
+For the password list using rockyou.txt will be sufficient.  
+![Cracking - Hashcat start](./Images/Cracking%20-%20Hashcat%20start.png)  
+
+After a few moments hashcat should finish and provide the password that matches the hash.  
+![Cracking - Hashcat end](./Images/Cracking%20-%20Hashcat%20end.png)  
+This will be the answer to the second question in the cracking section: **What is the cracked password?**  
+
+
 
 ---
 
