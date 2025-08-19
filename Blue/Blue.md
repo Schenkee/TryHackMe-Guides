@@ -20,7 +20,7 @@ This guide will cover the steps required to gain the answer to all question in t
 
 ---
 
-Firstly, let’s start our target machine and give it a few minutes to start all relevant services. I am using the TryHackME AttackBox lets start this up as well, or alternatively as in my case connect to the TryHackMe VPN to use your own attacking machine. You can even download the VM for offline usage if required.
+Firstly, let’s start the target machine and give it a few minutes to start all relevant services. I am using the TryHackME AttackBox let’s start this up as well, or alternatively as in my case connect to the TryHackMe VPN to use a self-hosted attacking machine. You can even download the VM for offline usage if required.
 
 ---
 
@@ -49,16 +49,16 @@ This can be done via ```sudo nmap -sS -sV -sC TARGET_IP -p 445```
 **-p** Tells nmap which port to scan. In this case only port 445 is to be scanned    
 
 This should result in the below output.  
-![Recond - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)  
+![Recon - Nmap -sV](./Images/Recon%20-%20Nmap%20-sV.png)  
 This has returned some very good information namely the OS details. Note that the system is running ***Windows 7 Professional 7601 Service Pack 1***
 
-Let’s do a google search for any vulnerabilities which might be affecting smb on ***Windows 7 Professional 7601 Service Pack 1*** and as expected there are some good results confirming that our target is vulnerable to CVE-2017-0144 Eternal Blue.  
-![Recond - Google](./Images/Recon%20-%20Google.png)  
+Let’s do a google search for any vulnerabilities which might be affecting smb on ***Windows 7 Professional 7601 Service Pack 1*** and as expected there are some good results confirming that the target is vulnerable to CVE-2017-0144 Eternal Blue.  
+![Recon - Google](./Images/Recon%20-%20Google.png)  
 Results returned on ExploitDB  
-![Recond - ExploitDB](./Images/Recon%20-%20ExploitDB.png)  
+![Recon - ExploitDB](./Images/Recon%20-%20ExploitDB.png)  
 This provides us the answer to the next and final question for the Recon section: ***What is this machine vulnerable to?***  
 
-This concludes our required Reconnisance for the room and now move on to gain access to the target machine.
+This concludes the required Reconnaissance for the room and now move on to gain access to the target machine.
 
 ---
 
@@ -71,9 +71,9 @@ Now let’s see if there are any relevant modules available to us via ```search 
 ![Gain Access - search](./Images/Gain%20Access%20-%20search.png)  
 In this instance use the first result, to load this module type ```use 0```  
 
-This will also now provide us with the answer to our first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
+This will also now provide us with the answer to the first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
-Now that the module is loaded the options need to be configured. Firstly, lets view our options via ```show options```  
+Now that the module is loaded the options need to be configured. Firstly, let’s view the options via ```show options```  
 ![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
 The items that need to be changed are **RHOSTS**, **LHOST** and the **Payload**  Noting that only the **RHOSTS** is empty and required to be set for the module. The **LHOST** is part of the payload options.  
 
@@ -84,11 +84,11 @@ Do this via the following commands
 
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
-Now view the options again via ```show options``` and confirm our remote and local host IPs are correct and that our payload has been adjusted as required.  
+Now view the options again via ```show options``` and confirm the remote and local host IPs are correct and that the payload has been adjusted as required.  
 ![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)  
 
 Once everything is set, type in ```run``` or ```exploit``` to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
-![Gain Access - Esxploit](./Images/Gain%20Access%20-%20Exploit.png)  
+![Gain Access - Exploit](./Images/Gain%20Access%20-%20Exploit.png)  
 
 Lastly, background this session via ```CTRL + Z``` to proceed onto the next phase of the attack to escalate the standard shell to a meterpreter session.  
 
@@ -103,12 +103,12 @@ Now let’s work on gaining a meterpreter session.
 
 Firstly, load the post exploit module via the following command  ```use post/multi/manage/shell_to_meterpreter```  
 ![Escalate - Meterpreter](./Images/Escalate%20-%20Meterpreter.png)
-This will also provide you the anser to the first question in this section of the room: **What is the name of the post module we will use?**
+This will also provide you the answer to the first question in this section of the room: **What is the name of the post module we will use?**
 
 Once this module has been loaded let’s view the options via ```show options``` here there is one **Required** empty option needing to be update.  
 This will also provide you the answer to the next question: **Show options, what option are we required to change?**
 
-To set this option input ```set session SESSION_NUMBER``` you can view your active sessions via ```sessions -i``` and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
+To set this option input ```set session SESSION_NUMBER``` you can view the active sessions via ```sessions -i``` and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
 ![Escalate - Meterpreter Options set](./Images/Escalate%20-%20Meterpreter%20Options%20set.png)  
 
 Once the options have been set input ```run``` to start the module and if all has worked after a minute or so you should have an active meterpreter session.  
@@ -120,7 +120,7 @@ Now follow the guide and confirm the session is running as **SYSTEM** via the ``
 
 Lastly the guide mentions to migrate to a different process ID. Firstly input ```ps``` to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
 
-It is also worth to check which process the session is running as which can be done via ```getpid``` this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. But for the sake of following the guide lets migrate to a different process using ```migrate PID``` 
+It is also worth to check which process the session is running as which can be done via ```getpid``` this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. Although migration may not be strictly necessary in this case, it is included to demonstrate process persistence techniques. Let’s migrate to a different process using ```migrate PID``` 
 ![Escalate - Pid and Migrate](./Images/Escalate%20-%20Pid%20and%20Migrate.png)  
 This may sometimes return errors in which case try a different pid.
 
@@ -130,13 +130,13 @@ Now that access has been gained to the target machine and escalated to a meterpr
 
 ## 🛠️ Cracking: 
 
-Let's proceed by first dumping the hashes of our target machines user passwords. This can be done with a meterpreter command ```hashdump```  
+Let's proceed by first dumping the hashes of the target machines user passwords. This can be done with a meterpreter command ```hashdump```  
 
 This might take a minute but once completed will dump the username and has details in the terminal.  
 ![Cracking - Hashdump](./Images/Cracking%20-%20Hashdump.png)  
-This will provide the details to asnwer the first question of this section: **What is the name of the non-default user?**  
+This will provide the details to answer the first question of this section: **What is the name of the non-default user?**  
 
-Now open a text file on the attacking machine with your prefered text editor and paste in the final portion **Jon's** password hash as below.  
+Now open a text file on the attacking machine with a preferred text editor and paste in the final portion **Jon's** password hash as below.  
 ![Cracking - jon.txt](./Images/Cracking%20-%20jon.txt.png)  
 
 Once the file has been saved use **Hashcat** to crack this.  
@@ -172,15 +172,15 @@ To output the flag value input ```type flag1.txt```
 ![Flags - Flag1](./Images/Flags%20-%20Flag1.png)  
 
 For flag two the following clue is provided - ***This flag can be found at the location where passwords are stored within Windows.***  
-Windows stores passwords in the following location ```C:\Widnows\System32\Config``` this is incidentally also where the meterpreter hashdump command retrieves the data from, namely from the **SAM** and **SYSTEM** files.  
+Windows stores passwords in the following location ```C:\Window\System32\Config``` this is incidentally also where the meterpreter hashdump command retrieves the data from, namely from the **SAM** and **SYSTEM** files.  
 
 Move to this directory from ```C:\``` via ```cd Windows\System32\Config``` and confirm the flags presence via ```dir```  
 
 To output the flag input ```type flag2.txt```  
 ![Flags - Flag2](./Images/Flags%20-%20Flag2.png)  
 
-For the final flag the following clue is provided - ***This flag can be found in an excellent location to loot. After all, Administrators usually have pretty interesting things saved.***   
-This could point to either the **Documents** folder or the **Desktop** folder of our named used **Jon**  
+For the final flag the following clue is provided - ***This flag can be found in an excellent location to loot. After all, Administrators usually have interesting things saved.***   
+This could point to either the **Documents** folder or the **Desktop** folder of the named used **Jon**  
 
 Navigate from ```C:\Windows\System32\Config``` to ```C:\Users\Jon\Documents``` once in the required folder input ```dir``` to confirm the flags presence.  
 
@@ -190,7 +190,12 @@ Output the flag file value via ```type flag3.txt```
 ---
 
 ## 🧠 Takeaways  
- 
+
+- Identified SMB service and OS details with Nmap, confirming vulnerability to MS17-010 (EternalBlue).  
+- Exploited EternalBlue with Metasploit to gain an initial shell and escalate to a meterpreter session.  
+- Practiced post-exploitation steps such as privilege verification, process migration, and session management.  
+- Extracted NTLM password hashes with meterpreter and successfully cracked them using Hashcat.  
+- Reinforced the structured workflow: reconnaissance → exploitation → privilege escalation → credential harvesting → persistence and validation.  
 
 ---
 
