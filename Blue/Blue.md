@@ -152,12 +152,40 @@ After a few moments hashcat should finish and provide the password that matches 
 ![Cracking - Hashcat end](./Images/Cracking%20-%20Hashcat%20end.png)  
 This will be the answer to the second question in the cracking section: **What is the cracked password?**  
 
-
-
 ---
 
 ## 🛠️ Find flags!: 
 
+Finally lets go and grab out flags to complete this room. 
+
+I actually found it easier to return back to the standard shell to get the flags. If needed changing sessions can be achived via the below.  
+```CTRL+Z``` to background the meterpreter session and then ```sessions -i STANDARD_SESSION_NUMBER``` to change back to the standard session.  
+![Flags - Change session](./Images/Flags%20-%20Change%20session.png)  
+
+The guide provides a few clues as to the flag locations - ***This flag can be found at the system root.*** Which on Windows would be ```C:\```  
+
+Navigate from ```C:\Windows\system32``` which is the default location for the standard shell on commencement to ```C:\``` via ```cd ..\..```  
+
+Once in the root directory confirm the flags presence via ```dir```  
+
+To output the flag value input ```type flag1.txt```  
+![Flags - Flag1](./Images/Flags%20-%20Flag1.png)  
+
+For flag two the following clue is provided - ***This flag can be found at the location where passwords are stored within Windows.***  
+Windows stores passwords in the following location ```C:\Widnows\System32\Config``` this is incidentaly also where the meterpreter hashdump command retreives the data from, naimly from the **SAM** and **SYSTEM** files.  
+
+Move to this directory from ```C:\``` via ```cd Windows\System32\Config``` and confirm the flags presence via ```dir```  
+
+To output the flag input ```type flag2.txt```  
+![Flags - Flag2](./Images/Flags%20-%20Flag2.png)  
+
+For the final flag the following clue is provided - ***This flag can be found in an excellent location to loot. After all, Administrators usually have pretty interesting things saved.***   
+This could point to either the **Documents** folder or the **Desktop** folder of our named used **Jon**  
+
+Navigate from ```C:\Windows\System32\Config``` to ```C:\Users\Jon\Documents``` once in the required folder input ```dir``` to confirm the flags presence.  
+
+Output the flag file vlaue via ```type flag3.txt```  
+![Flag - Flag3](./Images/Flags%20-%20flag3.png)  
 
 ---
 
