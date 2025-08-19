@@ -105,15 +105,27 @@ set payload windows/x64/shell/reverse_tcp
 
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
-Now view the options again via ```show options``` and confirm the remote and local host IPs are correct and that the payload has been adjusted as required.  
+Now view the options again via 
+```bash
+show options
+``` 
+and confirm the remote and local host IPs are correct and that the payload has been adjusted as required.  
 ![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)  
 
-Once everything is set, type in ```run``` or ```exploit``` to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
+Once everything is set, type in 
+```bash
+run
+```
+to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
 ![Gain Access - Exploit](./Images/Gain%20Access%20-%20Exploit.png)  
 
 Lastly, background this session via ```CTRL + Z``` to proceed onto the next phase of the attack to escalate the standard shell to a meterpreter session.  
 
-To confirm the session has been backgrounded and is still active type in ```sessions -i``` into the main msfconsole.  
+To confirm the session has been backgrounded and is still active type in 
+```bash
+sessions -i
+``` 
+into the main msfconsole.  
 ![Gain Access - Background](./Images/Gain%20Access%20-%20Background.png)  
 
 ---
