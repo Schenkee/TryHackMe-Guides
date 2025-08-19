@@ -136,7 +136,7 @@ Now let’s work on gaining a meterpreter session.
 
 Firstly, load the post exploit module via the following command  
 ```bash
-se post/multi/manage/shell_to_meterpreter
+use post/multi/manage/shell_to_meterpreter
 ```  
 ![Escalate - Meterpreter](./Images/Escalate%20-%20Meterpreter.png)
 This will also provide you the answer to the first question in this section of the room: **What is the name of the post module we will use?**
@@ -246,29 +246,52 @@ to change back to the standard session.
 The guide provides a few clues as to the flag locations - ***This flag can be found at the system root.*** Which on Windows would be ```C:\```  
 
 Navigate from ```C:\Windows\system32``` which is the default location for the standard shell on commencement to ```C:\``` via 
-```windows
+```cmd
 cd ..\..
 ```  
 
-Once in the root directory confirm the flags presence via ```dir```  
+Once in the root directory confirm the flags presence via 
+```cmd
+dir
+```  
 
-To output the flag value input ```type flag1.txt```  
+To output the flag value input 
+```cmd
+type flag1.txt
+```  
 ![Flags - Flag1](./Images/Flags%20-%20Flag1.png)  
 
 For flag two the following clue is provided - ***This flag can be found at the location where passwords are stored within Windows.***  
 Windows stores passwords in the following location ```C:\Windows\System32\Config``` this is incidentally also where the meterpreter hashdump command retrieves the data from, namely from the **SAM** and **SYSTEM** files.  
 
-Move to this directory from ```C:\``` via ```cd Windows\System32\Config``` and confirm the flags presence via ```dir```  
+Move to this directory from ```C:\``` via 
+```cmd
+cd Windows\System32\Config
+```
+Then confirm the flags presence via
+```cmd
+dir
+```  
 
-To output the flag input ```type flag2.txt```  
+To output the flag input 
+```cmd
+type flag2.txt
+```  
 ![Flags - Flag2](./Images/Flags%20-%20Flag2.png)  
 
 For the final flag the following clue is provided - ***This flag can be found in an excellent location to loot. After all, Administrators usually have interesting things saved.***   
 This could point to either the **Documents** folder or the **Desktop** folder of the named used **Jon**  
 
-Navigate from ```C:\Windows\System32\Config``` to ```C:\Users\Jon\Documents``` once in the required folder input ```dir``` to confirm the flags presence.  
+Navigate from ```C:\Windows\System32\Config``` to ```C:\Users\Jon\Documents``` once in the required folder input 
+```cmd
+dir
+``` 
+to confirm the flags presence.  
 
-Output the flag file value via ```type flag3.txt```  
+Output the flag file value via 
+```cmd
+type flag3.txt
+```  
 ![Flag - Flag3](./Images/Flags%20-%20flag3.png)  
 
 ---
