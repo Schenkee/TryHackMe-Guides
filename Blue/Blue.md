@@ -43,7 +43,10 @@ Notice that port 445 is open which is the default port used for Server Message B
 
 Run a nmap version scan and default scripts against the target port to see if any further useful information is returned.  
 
-This can be done via ```sudo nmap -sS -sV -sC TARGET_IP -p 445```
+This can be done via 
+```
+sudo nmap -sS -sV -sC TARGET_IP -p 445
+```
 #### ⚙️ **Options**  
 **sudo** Needed to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
 **-sS** Tells Nmap to perform a TCP SYN Scan.   
