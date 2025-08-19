@@ -115,7 +115,7 @@ Once the options have been set input ```run``` to start the module and if all ha
 This can be confirmed with ```sessions -i``` where there should now be two active sessions on the target.  
 ![Escalate Meterpreter sessions](./Images/Escalate%20Meterpreter%20sessions.png)
 
-Now follow the guide and confirm the session is running as **SYSTEM** via the ```getsystem``` command and as below it is confirmed the session is already running as **SYSTEM**
+Now follow the guide and confirm the session is running as **SYSTEM** via the ```getsystem``` command and as below it is confirmed the session is already running as **SYSTEM**  
 ![Escalate - System command](./Images/Escalate%20-%20System%20command.png)
 
 Lastly the guide mentions to migrate to a different process ID. Firstly input ```ps``` to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
