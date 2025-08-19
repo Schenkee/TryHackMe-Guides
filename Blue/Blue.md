@@ -243,7 +243,8 @@ sessions -i STANDARD_SESSION_NUMBER
 to change back to the standard session.  
 ![Flags - Change session](./Images/Flags%20-%20Change%20session.png)  
 
-The guide provides a few clues as to the flag locations - ***This flag can be found at the system root.*** Which on Windows would be ```C:\```  
+The guide provides a few clues as to the flag locations - ***This flag can be found at the system root.***  
+Which on Windows would be ```C:\```  
 
 Navigate from ```C:\Windows\system32``` which is the default location for the standard shell on commencement to ```C:\``` via 
 ```cmd
