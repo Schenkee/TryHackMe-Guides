@@ -99,6 +99,17 @@ To confirm the session has been backgrounded and is still active we can type in 
 
 ## 🛠️ Escalate: 
 
+Now lets work on gaining a meterpreter session.   
+
+Firstly we will need to load the post exploit module via the following command  ```use post/multi/manage/shell_to_meterpreter```  
+![Escalate - Meterpreter](./Images/Escalate%20-%20Meterpreter.png)
+This will also provide you the anser to the first question in this section of the room: **What is the name of the post module we will use?**
+
+Once this module has been loaded lets view the options via ```show options``` here we can see that there is one **Required** empty option we need to update.  
+This will also provide you the answer to the next question: **Show options, what option are we required to change?**
+
+To set this option input ```set session SESSION_NUMBER``` you can view the your active sessions via ```sessions -i``` and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
+![Escalate - Meterpreter Options set](./Images/Escalate%20-%20Meterpreter%20Options%20set.png)  
 
 ---
 
