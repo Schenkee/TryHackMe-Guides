@@ -28,7 +28,7 @@ Firstly, let’s start the target machine and give it a few minutes to start all
 First start with a straightforward nmap scan to see which ports are open and what possible path exists into the target machine.  
 
 Run nmap via the following 
-```linux  
+```shell  
 sudo nmap -sS TARGET_IP
 ```   
 #### ⚙️ **Options**  
