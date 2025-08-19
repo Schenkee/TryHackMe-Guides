@@ -9,7 +9,7 @@
 ## 🧩 Challenge Task Overview
 
 **Objective:**   
-This guide will cover the steps required to gain the answer to all question in the Blue room which focuses on the EternalBlue vulnerability in SMB and is the conclusion to the Metasploit module. 
+This guide will cover the steps required to gain the answer to all questions in the Blue room which focuses on the EternalBlue vulnerability in SMB and is the conclusion to the Metasploit module. 
 
 ---
 
@@ -27,7 +27,7 @@ Firstly, let’s start the target machine and give it a few minutes to start all
 ## 🛠️ Recon: 
 First start with a straightforward nmap scan to see which ports are open and what possible path exists into the target machine.  
 
-Run nmap via the following ```sudo nmap -sS TARGET_IP```   
+Run nmap via the following ```linux sudo nmap -sS TARGET_IP```   
 #### ⚙️ **Options**  
 **sudo** Needed to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
 **-sS** Tells Nmap to perform a TCP SYN Scan.  
@@ -36,7 +36,7 @@ This should return the below information.
 ![Recon - Nmap](./Images/Recon%20-%20Nmap.png)  
 This will give us enough information to answer the first question: **How many ports are open with a port number under 1000?**  
 
-Notice that port 445 is open which is the default port used for Server Message Block (SMB) protocol. SMB is the protocol which is vulnerable to Eternal Blue in certain windows versions. But let’s run another Nmap scan to try find anything further to verify that this port is indeed vulnerable.  
+Notice that port 445 is open which is the default port used for Server Message Block (SMB) protocol. SMB is the protocol which is vulnerable to Eternal Blue in certain windows versions. But let’s run another Nmap scan to try to find anything further to verify that this port is indeed vulnerable.  
 
 Run a nmap version scan and default scripts against the target port to see if any further useful information is returned.  
 
@@ -132,7 +132,7 @@ Now that access has been gained to the target machine and escalated to a meterpr
 
 Let's proceed by first dumping the hashes of the target machines user passwords. This can be done with a meterpreter command ```hashdump```  
 
-This might take a minute but once completed will dump the username and has details in the terminal.  
+This might take a minute but once completed will dump the username and hash details in the terminal.  
 ![Cracking - Hashdump](./Images/Cracking%20-%20Hashdump.png)  
 This will provide the details to answer the first question of this section: **What is the name of the non-default user?**  
 
@@ -172,7 +172,7 @@ To output the flag value input ```type flag1.txt```
 ![Flags - Flag1](./Images/Flags%20-%20Flag1.png)  
 
 For flag two the following clue is provided - ***This flag can be found at the location where passwords are stored within Windows.***  
-Windows stores passwords in the following location ```C:\Window\System32\Config``` this is incidentally also where the meterpreter hashdump command retrieves the data from, namely from the **SAM** and **SYSTEM** files.  
+Windows stores passwords in the following location ```C:\Windows\System32\Config``` this is incidentally also where the meterpreter hashdump command retrieves the data from, namely from the **SAM** and **SYSTEM** files.  
 
 Move to this directory from ```C:\``` via ```cd Windows\System32\Config``` and confirm the flags presence via ```dir```  
 
