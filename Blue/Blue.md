@@ -134,26 +134,64 @@ into the main msfconsole.
 
 Now let’s work on gaining a meterpreter session.   
 
-Firstly, load the post exploit module via the following command  ```use post/multi/manage/shell_to_meterpreter```  
+Firstly, load the post exploit module via the following command  
+```bash
+se post/multi/manage/shell_to_meterpreter
+```  
 ![Escalate - Meterpreter](./Images/Escalate%20-%20Meterpreter.png)
 This will also provide you the answer to the first question in this section of the room: **What is the name of the post module we will use?**
 
-Once this module has been loaded let’s view the options via ```show options``` here there is one **Required** empty option needing to be update.  
+Once this module has been loaded let’s view the options via 
+```bash
+show options
+``` 
+here there is one **Required** empty option needing to be update.  
 This will also provide you the answer to the next question: **Show options, what option are we required to change?**
 
-To set this option input ```set session SESSION_NUMBER``` you can view the active sessions via ```sessions -i``` and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
+To set this option input 
+```bash
+set session SESSION_NUMBER
+``` 
+you can view the active sessions via 
+```bash
+sessions -i
+``` 
+and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
 ![Escalate - Meterpreter Options set](./Images/Escalate%20-%20Meterpreter%20Options%20set.png)  
 
-Once the options have been set input ```run``` to start the module and if all has worked after a minute or so you should have an active meterpreter session.  
-This can be confirmed with ```sessions -i``` where there should now be two active sessions on the target.  
+Once the options have been set input 
+```bash
+run
+``` 
+to start the module and if all has worked after a minute or so you should have an active meterpreter session.  
+This can be confirmed with 
+```bash
+sessions -i
+``` 
+where there should now be two active sessions on the target.  
 ![Escalate Meterpreter sessions](./Images/Escalate%20Meterpreter%20sessions.png)
 
-Now follow the guide and confirm the session is running as **SYSTEM** via the ```getsystem``` command and as below it is confirmed the session is already running as **SYSTEM**  
+Now follow the guide and confirm the session is running as **SYSTEM** via the 
+```bash
+getsystem
+``` 
+command and as below it is confirmed the session is already running as **SYSTEM**  
 ![Escalate - System command](./Images/Escalate%20-%20System%20command.png)
 
-Lastly the guide mentions to migrate to a different process ID. Firstly input ```ps``` to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
+Lastly the guide mentions to migrate to a different process ID. Firstly input 
+```bash
+ps
+``` 
+to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
 
-It is also worth to check which process the session is running as which can be done via ```getpid``` this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. Although migration may not be strictly necessary in this case, it is included to demonstrate process persistence techniques. Let’s migrate to a different process using ```migrate PID``` 
+It is also worth to check which process the session is running as which can be done via 
+```bash
+getpid
+``` 
+this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. Although migration may not be strictly necessary in this case, it is included to demonstrate process persistence techniques. Let’s migrate to a different process using 
+```bash
+migrate PID
+``` 
 ![Escalate - Pid and Migrate](./Images/Escalate%20-%20Pid%20and%20Migrate.png)  
 This may sometimes return errors in which case try a different pid.
 
@@ -163,7 +201,10 @@ Now that access has been gained to the target machine and escalated to a meterpr
 
 ## 🛠️ Cracking: 
 
-Let's proceed by first dumping the hashes of the target machines user passwords. This can be done with a meterpreter command ```hashdump```  
+Let's proceed by first dumping the hashes of the target machines user passwords. This can be done with a meterpreter command 
+```bash
+hashdump
+```  
 
 This might take a minute but once completed will dump the username and hash details in the terminal.  
 ![Cracking - Hashdump](./Images/Cracking%20-%20Hashdump.png)  
@@ -174,7 +215,10 @@ Now open a text file on the attacking machine with a preferred text editor and p
 
 Once the file has been saved use **Hashcat** to crack this.  
 
-Use the following command ```hashcat -m 1000 -a 0 HASH_FILE /LOCATION_OF_PASSWORD_LIST``` 
+Use the following command 
+```bash
+hashcat -m 1000 -a 0 HASH_FILE /LOCATION_OF_PASSWORD_LIST
+``` 
 #### ⚙️ **Options**  
 **-m** Is used to identify the hash type. More details can be found here [https://hashcat.net/wiki/doku.php?id=example_hashes](https://hashcat.net/wiki/doku.php?id=example_hashes) In this case it’s a windows hash so NTLM which is code 1000.  
 **-a** This specifies the attackmode to be used. In this instance attackmode 0 - Dictionary Attack.  
@@ -192,12 +236,19 @@ This will be the answer to the second question in the cracking section: **What i
 Finally let’s go and grab out flags to complete this room. 
 
 I found it easier to return to the standard shell to get the flags. If needed changing sessions can be achieved via the below.  
-```CTRL+Z``` to background the meterpreter session and then ```sessions -i STANDARD_SESSION_NUMBER``` to change back to the standard session.  
+```CTRL+Z``` to background the meterpreter session and then 
+```bash
+sessions -i STANDARD_SESSION_NUMBER
+``` 
+to change back to the standard session.  
 ![Flags - Change session](./Images/Flags%20-%20Change%20session.png)  
 
 The guide provides a few clues as to the flag locations - ***This flag can be found at the system root.*** Which on Windows would be ```C:\```  
 
-Navigate from ```C:\Windows\system32``` which is the default location for the standard shell on commencement to ```C:\``` via ```cd ..\..```  
+Navigate from ```C:\Windows\system32``` which is the default location for the standard shell on commencement to ```C:\``` via 
+```windows
+cd ..\..
+```  
 
 Once in the root directory confirm the flags presence via ```dir```  
 
