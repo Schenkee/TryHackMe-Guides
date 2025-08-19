@@ -27,7 +27,8 @@ Firstly, let’s start the target machine and give it a few minutes to start all
 ## 🛠️ Recon: 
 First start with a straightforward nmap scan to see which ports are open and what possible path exists into the target machine.  
 
-Run nmap via the following ```bash sudo nmap -sS TARGET_IP```   
+Run nmap via the following ```bash 
+sudo nmap -sS TARGET_IP```   
 #### ⚙️ **Options**  
 **sudo** Needed to run this command as a privileged user otherwise it will perform a 3-way-handshake and be a TCP Connect Scan -sT.  
 **-sS** Tells Nmap to perform a TCP SYN Scan.  
