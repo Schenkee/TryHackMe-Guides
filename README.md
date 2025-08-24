@@ -10,7 +10,7 @@
 |---------------------------|----------------|---------------------------------------|
 | [Vulnerability Capstone](https://tryhackme.com/room/vulnerabilitycapstone)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Vulnerability_Capstone/Vulnerability_Capstone.md) |  
 | [Blue](https://tryhackme.com/room/blue)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Blue/Blue.md) |  
-| [Summit](https://tryhackme.com/room/summit) |🟢 Easy | Comming Soon |
+| [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) In Progress |
 | [Eviction](https://tryhackme.com/room/eviction) |🟢 Easy | Comming Soon |
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   |
 | [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)|
