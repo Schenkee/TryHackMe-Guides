@@ -1,6 +1,6 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-> 🛡️ A curated collection of TryHackMe walkthroughs focused on Red Team and penetration testing, with select Blue Team fundamentals included. New guides are added as I complete rooms that provide valuable learning and showcase practical skills.
+> 🛡️ A curated collection of TryHackMe walkthroughs covering a wide range of cybersecurity topics. New guides are added as I complete rooms that provide valuable learning and practical skill development.
 
 ---
 
