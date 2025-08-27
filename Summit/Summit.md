@@ -149,7 +149,7 @@ Now onto question five for which we are not given an ```.exe``` file but a netwo
 ![sample 5 - file](./Images/sample%205%20-%20file.png)  
 
 Upon opening the file, a log of network traffic is provided to try and identify any suspicious patterns. When inspecting this outgoing traffic, we can see repeated small messages being sent to the same IP Address.  
-![sample 5 - logs](.//Images/sample%205%20-%20logs.png)  
+![sample 5 - logs](./Images/sample%205%20-%20logs.png)  
 
 Every 30 minutes a message of 97 bytes is being sent to ```51.102.10.19``` which looks very odd and possibly could be a device reaching out to a command and control(C2) server. This would also correlate with our progress up the Pyramid of Pain as the next level would be Tools which includes Command and Control Servers.  
 
