@@ -7,7 +7,7 @@
 # 📚 Write-Up Index
 
 | 🏠 Room Name              | 🎯 Difficulty* | 📘 Guide Link                        | 📄 Report |  
-|---------------------------|----------------|---------------------------------------|
+|---------------------------|----------------|---------------------------------------|---------------------------------------|
 | [Vulnerability Capstone](https://tryhackme.com/room/vulnerabilitycapstone)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Vulnerability_Capstone/Vulnerability_Capstone.md) | Work in Progress |  
 | [Blue](https://tryhackme.com/room/blue)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Blue/Blue.md) | Work in Progress |  
 | [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) | Work in Progress |  
