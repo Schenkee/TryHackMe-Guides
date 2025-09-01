@@ -1,16 +1,17 @@
-Summary:  
+# Summary 
 A penetration test was conducted against the TryHackMe NetSec Challenge endpoint to identify open ports, exposed services and vulnerabilities. Multiple services were discovered that allowed sensitive data extraction, account takeover, and intrusion detection system (IDS) bypass.
  Exploiting these services could enable attackers to map the organisation’s infrastructure, compromise accounts through weak SSH credentials, and exfiltrate sensitive data without detection. It is recommended to review the necessity of exposed services, harden configurations, enforce strong password or key-based authentication for SSH, and tune IDS signatures to improve detection capability.  
  
-Vulnerabilities:  
-1.	**Open Ports Detected**  
+# Vulnerabilities  
+
+### 1. Open Ports Detected
 **Summary:** Multiple open ports were discovered which enabled service identification. This enables attackers to footprint the company’s infrastructure and services in use.
 
 **Background:** Open ports allowing service identification can aid attackers in building targeted attacks on known weak or outdated services. Service identification may also enable attackers to perform further targeted reconnaissance to gain further information about a service and possible vulnerabilities present.  
 
 **Technical details & Evidence:** Scanning of open ports was performed with nmap via the following command:  
 ```bash
-“sudo nmap -sS 10.10.79.185 -T5 -p-“
+sudo nmap -sS 10.10.79.185 -T5 -p-
 ```
 (-T5 used as scan conducted in a lab environment)   
 
@@ -29,7 +30,7 @@ As evident in the above the scan uncovered six open ports and attached services 
 
 Further targeted scanning was then performed on the port with an unknown service using the following command   
 ```bash
-“sudo namp -sV 10.10.104.144 -p 10021”
+sudo namp -sV 10.10.104.144 -p 10021
 ```
 (note change it IP due to target restart required
 
