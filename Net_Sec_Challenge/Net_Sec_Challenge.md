@@ -3,6 +3,7 @@
 **Room URL:** [https://tryhackme.com/room/netsecchallenge](https://tryhackme.com/room/netsecchallenge)  
 **Author:** Schenkee  
 **Profile:** [https://tryhackme.com/p/schenkee](https://tryhackme.com/p/schenkee)  
+**Report:** [Net Sec Challenge Penetration Test Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Net_Sec_Challenge_report.md)
 
 ---
 
