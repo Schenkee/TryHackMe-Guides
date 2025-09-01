@@ -12,7 +12,7 @@
 | [Blue](https://tryhackme.com/room/blue)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Blue/Blue.md) | Work in Progress |  
 | [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) | Work in Progress |  
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   | Work in Progress |  
-| [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)| [Report]() |  
+| [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)| [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Net_Sec_Challenge_report.md) |  
 | *(More Coming Soon)*      |               |                                       |
   
 *Difficulty as per TryHackMe
