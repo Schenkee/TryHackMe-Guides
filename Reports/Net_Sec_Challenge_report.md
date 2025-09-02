@@ -32,7 +32,7 @@ Further targeted scanning was then performed on the port with an unknown service
 ```bash
 sudo namp -sV 10.10.104.144 -p 10021
 ```
-(note change it IP due to target restart required
+(note change it IP due to target restart required)
 
 This provided further information about the service running on port 10021  
  ![Question 6.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Images/Question%206.png)  
@@ -43,3 +43,29 @@ Identified Service:
 
 **Remediation Advice:** It is advised that any ports not required for business operations be closed and unused services be disabled or uninstalled. Update firewall rule ACL’s to ensure only authorized IPs can connect to services, to reduce attack surface. It is also recommended that regular port scanning is conducted, and service reviews performed to ensure no ports are accidentally left open to the internet.
 
+---
+
+### 2. Information Disclosure via HTTP Headers  
+
+**Summary:** The HTTP service disclosed sensitive information within response headers accessible without authentication. Attackers could use this information to aid further intrusions.   
+
+**Background:** Service banners and verbose headers often contain information not required for normal operations but can assist attackers in reconnaissance. In this case, sending a simple GET request caused the server to reveal sensitive information in its HTTP response.  
+
+**Technical details & Evidence:** A connection to the HTTP service was established using Telnet, and the following request was issued:  
+
+```bash
+telnet 10.10.104.144 80
+GET / HTTP/1.1
+host: test
+```
+![Question 4](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Images/Question%204.png)
+
+The server responded with header information that included sensitive data.  
+
+**Impact:** An attacker could passively harvest sensitive information about the system or application stack. This knowledge may facilitate more targeted exploits, reduce the time needed for successful attacks, and damage the organisation’s reputation.   
+
+**Remediation Advice:** Configure the web server to suppress unnecessary or verbose headers to prevent data leakage. Implement monitoring within the organisation’s SIEM or IDS/IPS for unusual direct connections to web services and perform regular configuration reviews to ensure sensitive data is not exposed.  
+
+---
+
+### 3. Information Disclosure via SSH Banner
