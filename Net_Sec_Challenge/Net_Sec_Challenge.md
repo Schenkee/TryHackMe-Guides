@@ -73,7 +73,7 @@ telnet TARGET_IP 80
 To attempt to make a telnet connect to port 80 which we have seen above was running a http server.  
 Once connected to the HTTP server we can proceed with the below commands to see if we can find the flag in the HTTP header.  
 ```bash
-GET / HTTP/1/1
+GET / HTTP/1.1
 ```  
 Hit Enter.  
 ```bash
