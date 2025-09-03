@@ -12,7 +12,7 @@ A penetration test was conducted against the TryHackMe NetSec Challenge endpoint
 ## Vulnerabilities  
 
 ### 1. Open Ports Detected  
-**CVSS v3.1 Base Score:** 5.3 (Medium)
+**CVSS v4 Base Score:** 6.9 (Medium)
 
 **Summary:** Multiple open ports were discovered which enabled service identification. This enables attackers to footprint the company’s infrastructure and services in use.  
 
@@ -54,7 +54,7 @@ Identified Service:
 ---
 
 ### 2. Information Disclosure via HTTP Headers  
-**CVSS v3.1 Base Score:** 5.3 (Medium)  
+**CVSS v4 Base Score:** 6.9 (Medium)
 
 **Summary:** The HTTP service disclosed sensitive information within response headers accessible without authentication. Attackers could use this information to aid further intrusions.   
 
@@ -77,7 +77,7 @@ The server responded with header information that included sensitive data.
 ---
 
 ### 3. Information Disclosure via SSH Banner 
-**CVSS v3.1 Base Score:** 5.3 (Medium)  
+**CVSS v4 Base Score:** 6.9 (Medium)
 
 **Summary:** The SSH service disclosed sensitive information, including version details in the banner, accessible without authentication. Attackers could use this information to aid further intrusions.   
 
@@ -97,7 +97,7 @@ Upon connection, sensitive data was presented in the banner and detailed version
 ---
 
 ### 4. FTP Weak Authentication & Sensitive File Disclosure 
-**CVSS v3.1 Base Score:** 7.5 (High)  
+**CVSS v3.1 Base Score:** 8.8 (High)  
 
 **Summary:** The FTP service used weak passwords, allowing attackers to easily log in and access sensitive files, putting the organisation’s data at risk.  
 
@@ -120,7 +120,7 @@ After logging into the FTP service as the user ```quinn``` sensitive files were 
 ---
 
 ### 5.	IDS Bypass via Stealth Scanning  
-**CVSS v3.1 Base Score:** 5.3 (Medium)  
+**CVSS v4 Base Score:** 6.9 (Medium)
 
 **Summary:** The organisation’s IDS could be bypassed using stealth port scans, allowing attackers to perform reconnaissance without detection.  
 
