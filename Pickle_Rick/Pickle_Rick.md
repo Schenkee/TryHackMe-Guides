@@ -116,6 +116,53 @@ Success! The found login details worked and there is now a usable ```Command Pan
 
 ## 🛠️ Flag 1 
 
+Now that login has been achieved and a ```Command Panel``` has been provided to use.  
+
+Perform some simple recon via commands like   
+```bash
+id
+whoami
+pwd
+ls
+```    
+```ls``` provides some good information about the files in the current working directory. Where there are two files of interest ```Sup3rS3cretPickl3Ingred.txt``` and ```clue.txt```  
+![Flag1 - ls.png](./Images/Flag1%20-%20ls.png)  
+
+The first flag has been found. Try to output the file via  
+```bash
+cat Sup3rS3cretPickl3Ingred.txt
+```  
+Access is denied because the ```cat``` command has been disabled in the challenge.    
+![Flag1 - cat fail.png](./Images/Flag1%20-%20cat%20fail.png)  
+
+As the ```cat``` command has been disabled, alternative methods will need to be used to output the file contents. In this first example a python3 HTTP server will be started to download the files to the attacking machine.  
+
+Start the server via
+```bash
+python3 -m http.server 5050
+```
+#### ⚙️ **Options**   
+**-m** Allows python module as a script directly from the command line, using the module's name rather than its file path.  
+**5050** Is the chosen port to open for the HTTP server.  
+![Flag1 - Server](./Images/Flag1%20-%20Server.png)  
+  
+Now on the attacking machine use ```wget``` to download both files of interest via.
+```bash
+wget http://TARGET_IP:5050/Sup3rS3cretPickl3Ingred.txt
+wget http://TARGET_IP:5050/clue.txt
+```
+![Flag1 - wget](./Images/flag1%20-%20wget.png)  
+
+This method works because the command panel allows execution of Python, so we can spin up a simple HTTP server to transfer files to our attacking machine.  
+
+
+Now that the files are on the attacking machine, use ```cat``` to output the content.
+```bash
+cat Sup3rS3cretPickl3Ingred.txt
+```
+![Flag1 - file](./Images/Flag1%20-%20file.png)  
+
+The same can be repeated for the ```clue.txt``` file if required or if you feel you are stuck.   
 
 
 ---
