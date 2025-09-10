@@ -16,7 +16,7 @@ This guide covers the steps required to solve all tasks in the Pickle Rick room.
 ## 🧰 Tools I Used  
 - nmap  
 - gobuster
-- Python3 http server
+- Python3 HTTP server
 
 ---
 
@@ -69,9 +69,9 @@ gobuster -u TARGET_URL -w /usr/share/wordlists/seclists/Discovery/Web-Content/co
 #### ⚙️ **Options**   
 **-u** Used to provide the target url to scan.  
 **-w** Path to wordlist used for enumeration.   
-**-t** Instructions gobutser to scan using 200 concurrent threads. This is acceptable for basic CTF rooms, but likely not in real scenarios. 
-**-x** Used to append .php onto directories. This will be helpful as the severs is running PHP and can help to yield results like ```login.php```, which may otherwise be missed.
-**-o** Outputs the results into a text file.  
+**-t** Instructions gobuster to scan using 200 concurrent threads. This is acceptable for basic CTF rooms, but likely not in real scenarios.   
+**-x** Used to append .php onto directories. This will be helpful as the severs is running PHP and can help yield results like ```login.php```, which may otherwise be missed.  
+**-o** Outputs the results into a text file.    
 ![Recon - Gobuster scan.png](./Images/Recond%20-%20Gobuster%20scan.png)  
 
 This yielded good results, for further investigation.  
@@ -94,7 +94,7 @@ For the final item of initial recon navigate to the ```robots.txt``` page via
 http://TARGET_IP/robots.txt
 ```
 ![Recon - Robots.png](./Images/Recond%20-%20Robots.png)  
-This looks promising, possible a password to go with the found username. 
+This looks promising, possibly a password to go with the found username. 
 
 
 Navigate to the ```login.php``` page
@@ -103,7 +103,7 @@ http://TARGET_IP/login.php
 ```
 ![Recond - Login Page.png](./Images/Recon%20-%20Login%20Page.png)  
 
-Try entering the found username and possible password.  
+Try entering the found username and possibly password.  
 ```text
 Username: R1ckRul3s
 Password: Wubbalubbadubdub
@@ -135,7 +135,7 @@ cat Sup3rS3cretPickl3Ingred.txt
 Access is denied because the ```cat``` command has been disabled in the challenge.    
 ![Flag1 - cat fail.png](./Images/Flag1%20-%20cat%20fail.png)  
 
-As the ```cat``` command has been disabled, alternative methods will need to be used to output the file contents. In this first example a python3 HTTP server will be started to download the files to the attacking machine.  
+As the ```cat``` command has been disabled, alternative methods will need to be used to output the file contents. In this first example a Python3 HTTP server will be started to download the files to the attacking machine.  
 
 Start the server via
 ```bash
@@ -169,26 +169,71 @@ The same can be repeated for the ```clue.txt``` file if required or if you feel 
 
 ## 🛠️ Rabbit Hole
 
+When reviewing the source code of the logged in portal page, there is a seemingly interesting looking encoded string present. 
+![Rabbir Hole.png](./Images/Rabbit%20Hole.png)  
 
+When this is decoded multiple times via a service like [https://hashes.com/en/decrypt/hash](https://hashes.com/en/decrypt/hash) the result is ```Rabbit Hole``` and does not provide anything tangible.    
 
 ----
 
 ## 🛠️ Flag 2
 
+The first flag was found in the working directory. After spending some time looking around the file structure the home folder for ```rick``` can be located via 
+```bash
+ls -la /home
+```
+If the contents on the ```rick``` folder are reviewed another flag is located.
+```bash
+ls -la /home/rick
+```
+![Flag2 - location](./Images/Flag2%20-%20location.png)
 
+This file is not appended with a standard file type indicator such as ```.txt``` but based on the output above it can be determined that this is a file and not a directory because the of the missing starting ```d``` in the file info of ```-rwxrwxrwx```.  
+
+As the file contains a space in its name the file path will been to be encapsulated in quotes and can be output with the ```strings``` command as below.
+```bash
+strings "/home/rick/second ingredients"
+```
+![Flag2 - file](./Images/Flag2%20-%20file.png)
 
 ---
 
 ## 🛠️ Flag 3
 
+Continue to explore the file system. When reviewing the contents of the systems ```root``` directory via
+```bash
+ls /
+```
+![Flag3 - root dir](./Images/Flag3%20-%20root%20dir.png)  
+The ```root``` folder would be a good place to start.  
 
+To view the contents of the root folder ```sudo``` will need to be used and the command.
+```bash
+sudo -l
+```
+Can be used to confirm that the logged in user has full ```sudo``` privileges on the target system.
+
+To view the contents of the ```root``` folder use
+```bash
+sudo ls /root
+```
+This provides the location for the third and final flag.  
+![Flag3 - flag location](./Images/Flag3%20-%20flag%20location.png)  
+
+To output this text file use the ```less``` command as below.  
+```bash
+sudo less /root/3rd.txt
+```  
+![Flag3 - file](./Images/Flag3%20-%20file.png)  
 
 ---
 
 ## 🧠 Takeaways  
 
+- Reinforced the importance of thorough manual recon and enumeration to locate possible secrets.  
+- Gained experience using automated enumeration tools using nmap and gobuster.  
+- Hands-on experience using various methods to output file contents.  
+
 ---
 
 Thank you for following through my guide of the TryHackMe Pickle Rick room. 
-
-
