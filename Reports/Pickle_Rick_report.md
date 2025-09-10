@@ -1,6 +1,6 @@
 # Penetration Test Report  
 **Engagement:** TryHackMe - Pickle Rick  
-**Date:**   
+**Date:** September 2025  
 **Tester:** Colin S  
 
 ---
