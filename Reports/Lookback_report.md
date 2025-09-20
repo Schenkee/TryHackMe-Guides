@@ -179,7 +179,7 @@ cat c:\\users\\Administrator\\Documents\\flag.txt
 
 [CWE-1392](https://cwe.mitre.org/data/definitions/1392.html)  
 [Carna Botnet](https://en.wikipedia.org/wiki/Carna_botnet)  
-[https://www.cve.org/CVERecord?id=CVE-2021-31207](https://www.cve.org/CVERecord?id=CVE-2021-31207)  
-[https://www.cve.org/CVERecord?id=CVE-2021-34523](https://www.cve.org/CVERecord?id=CVE-2021-34523)  
-[https://www.cve.org/CVERecord?id=CVE-2021-34473](https://www.cve.org/CVERecord?id=CVE-2021-34473)  
-[https://www.rapid7.com/db/modules/exploit/windows/http/exchange_proxyshell_rce/](https://www.rapid7.com/db/modules/exploit/windows/http/exchange_proxyshell_rce/)  
+[CVE-2021-31207](https://www.cve.org/CVERecord?id=CVE-2021-31207)  
+[CVE-2021-34523](https://www.cve.org/CVERecord?id=CVE-2021-34523)  
+[CVE-2021-34473](https://www.cve.org/CVERecord?id=CVE-2021-34473)  
+[exchange_proxyshell_rce detail](https://www.rapid7.com/db/modules/exploit/windows/http/exchange_proxyshell_rce/)  
