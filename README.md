@@ -8,7 +8,7 @@
 
 | 🏠 Room Name              | 🎯 Difficulty* | 📘 Guide Link                        | 📄 Report |  
 |---------------------------|----------------|---------------------------------------|---------------------------------------|
-| [Vulnerability Capstone](https://tryhackme.com/room/vulnerabilitycapstone)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Vulnerability_Capstone/Vulnerability_Capstone.md) | Work in Progress |  
+| [Vulnerability Capstone](https://tryhackme.com/room/vulnerabilitycapstone)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Vulnerability_Capstone/Vulnerability_Capstone.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Vulnerability_Capstone_report.md) |  
 | [Blue](https://tryhackme.com/room/blue)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Blue/Blue.md) | Work in Progress |  
 | [Pickle Rick](https://tryhackme.com/room/picklerick) | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Pickle_Rick/Pickle_Rick.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Pickle_Rick_report.md) |    
 | [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) | N/A |  
