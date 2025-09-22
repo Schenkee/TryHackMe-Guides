@@ -1,4 +1,4 @@
-# 🧠 TryHackMe Room: Lookback 
+# 🧠 TryHackMe Room: Silver Platter
 
 **Room URL:** [https://tryhackme.com/room/silverplatter](https://tryhackme.com/room/silverplatter)  
 **Author:** Schenkee  
