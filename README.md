@@ -1,6 +1,6 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-> 🛡️ A curated collection of TryHackMe walkthroughs covering a wide range of cybersecurity topics. New guides are added as I complete rooms that provide valuable learning and practical skill development.
+> 🛡️ A curated collection of TryHackMe walkthroughs covering a wide range of cybersecurity topics. New guides are added as I complete rooms that provide valuable learning and practical skill development. This repository also contains mock penetration testing reports I write for each completed CFT to help me build my skills in report writing which is a critical aspect of penetration testing.  
 
 ---
 
@@ -13,7 +13,7 @@
 | [Pickle Rick](https://tryhackme.com/room/picklerick) | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Pickle_Rick/Pickle_Rick.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Pickle_Rick_report.md) |    
 | [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) | N/A |  
 | [Lookback](https://tryhackme.com/room/lookback)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Lookback/Lookback.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Lookback_report.md) |  
-| [Silver Platter](https://tryhackme.com/room/silverplatter)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Silver_Platter/Silver_Platter.md) | Work in Progress |    
+| [Silver Platter](https://tryhackme.com/room/silverplatter)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Silver_Platter/Silver_Platter.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Silver_Platter_report.md) |    
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   | Work in Progress |  
 | [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)| [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Net_Sec_Challenge_report.md) |  
 | *(More Coming Soon)*      |               |                                       |
