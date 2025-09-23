@@ -14,7 +14,7 @@
 | [Summit](https://tryhackme.com/room/summit) |🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Summit/Summit.md) | N/A |  
 | [Lookback](https://tryhackme.com/room/lookback)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Lookback/Lookback.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Lookback_report.md) |  
 | [Silver Platter](https://tryhackme.com/room/silverplatter)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Silver_Platter/Silver_Platter.md) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Silver_Platter_report.md) |    
-| [Billing](https://tryhackme.com/room/billing)  | 🟢 Easy | [View Guide]() | Work in Progress |  
+| [Billing](https://tryhackme.com/room/billing)  | 🟢 Easy | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Billing/Billing.md) | Work in Progress |  
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   | N/A |  
 | [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)| [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Net_Sec_Challenge_report.md) |  
 | *(More Coming Soon)*      |               |                                       |
