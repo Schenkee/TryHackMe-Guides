@@ -23,7 +23,7 @@ This guide covers the steps required to solve all tasks in the Silver Platter ro
 
 ---
 
-Firstly, let’s start our target machine and give it a few minutes to start all relevant services. We can also either start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  If needed, you can add ```silverplatter.thm``` along with the assigned IP to your ```/etc/hosts``` file which can make life easier than remembering an IP all the time.  
+Firstly, let’s start our target machine and give it a few minutes to start all relevant services. We can also either start the AttackBox or as in my case connect our own machine to the TryHackMe VPN.  If needed, you can add ```silverplatter.thm``` along with the assigned IP to your ```/etc/hosts``` file which can make life easier, rather than remembering an IP all the time you can simply use ```http://silverplatter.thm```  
 
 ---
 
