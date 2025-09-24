@@ -1,6 +1,6 @@
 # 🧠 TryHackMe Write-Ups by Schenkee
 
-> 🛡️ A curated collection of TryHackMe walkthroughs covering a wide range of cybersecurity topics. New guides are added as I complete rooms that provide valuable learning and practical skill development. This repository also contains mock penetration testing reports I write for each completed CFT to help me build my skills in report writing which is a critical aspect of penetration testing.  
+> 🛡️ A curated collection of TryHackMe walkthroughs covering a wide range of cybersecurity topics. New guides are added as I complete rooms that provide valuable learning and practical skill development. This repository also contains mock penetration testing reports I write for each completed CTF to help me build my skills in report writing which is a critical aspect of penetration testing.  
 
 ---
 
@@ -25,7 +25,7 @@
 
 # 👤 About Me
 
-> I'm a cybersecurity learner working through various practical hands-on labs primarily on TryHackMe at the moment and creating walk throughs of labs I find interesting and helpful to demonstrate my learned skills.  
+> I'm a cybersecurity learner working through various practical hands-on labs primarily on TryHackMe at the moment and creating walk throughs of labs I find interesting and helpful to demonstrate my learned skills. As paractice I also write mock penetration test reports for the rooms I create guides for.   
 🔗 [TryHackMe Profile](https://tryhackme.com/p/schenkee)  
 
 ---
