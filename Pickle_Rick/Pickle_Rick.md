@@ -6,7 +6,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview  
+## 🧩 Overview  
 
 **Objective:**  
 This guide covers the steps required to solve all tasks in the Pickle Rick room. The challenge involves web enumeration, exploiting a command panel, and retrieving three hidden ingredients (flags). Due to one of the most common commands to output file contents being blocked, this guide will cover three alternative ways to view the flags.  
