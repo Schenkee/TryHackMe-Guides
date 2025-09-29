@@ -6,7 +6,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview
+## 🧩 Overview
 
 **Objective:**   
 This guide will cover the steps required to gain the answer to all questions in the Blue room which focuses on the EternalBlue vulnerability in SMB and is the conclusion to the Metasploit module. 
