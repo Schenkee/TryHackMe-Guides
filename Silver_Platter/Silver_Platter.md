@@ -6,7 +6,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview  
+## 🧩 Overview  
 
 **Objective:**  
 This guide covers the steps required to solve all tasks in the Silver Platter room. This challenge involves web enumeration, login panel brute forcing and exploiting a web vulnerability. Once initial access is gained the challenges changes to some Linux privilege escalation. Overall, this was an enjoyable room that added value to my skill set. There is a stronger focus on manual enumeration and research in this room rather than reliance on automated tools. I must admit I had a peek at guide once when nothing was returned for one of the HTTP ports, and I was a bit lost.  
