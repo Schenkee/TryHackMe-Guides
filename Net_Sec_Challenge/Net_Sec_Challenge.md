@@ -7,7 +7,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview
+## 🧩 Overview
 
 **Objective:**   
 This guide will cover the steps required to gain the answer to all 8 questions in this challenge room, focused on the skills obtained via the Network Security module.  
