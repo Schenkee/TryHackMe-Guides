@@ -6,7 +6,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview  
+## 🧩 Overview  
 
 **Objective:** This guide walks through solving the Billing room. This challenge involves web enumeration, exploitation of CVE-2023-30258 via Metasploit and lastly some Linux privilege escalation to capture the root flag. 
 
