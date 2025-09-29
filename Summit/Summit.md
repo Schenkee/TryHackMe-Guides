@@ -6,7 +6,7 @@
 
 ---
 
-## 🧩 Challenge Task Overview
+## 🧩 Overview
 
 **Objective:**   
 This guide will cover the steps required to gain the answer to all questions in the Summit room which is the penultimate challenge in the Cyber Defence Frameworks module. This room requires the analysis of malware samples and the implementation of defence steps, with each stage being a step up on the Pyramid of Pain. It is recommended to have completed the [Pyramid of Pain](https://tryhackme.com/room/pyramidofpainax) and [MITRE](https://tryhackme.com/room/mitre) rooms.
