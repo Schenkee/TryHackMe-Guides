@@ -18,6 +18,7 @@
 | [File Inclusion](https://tryhackme.com/room/fileinc)            | 🟡 Medium     | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/File_Inclusion/File_Inclusion.md)   | N/A |  
 | [Net Sec Challenge](https://tryhackme.com/room/netsecchallenge) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Net_Sec_Challenge/Net_Sec_Challenge.md)| [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Net_Sec_Challenge_report.md) |  
 | [Rabbit Store](https://tryhackme.com/room/rabbitstore) |  🟡 Medium   | [View Guide](https://github.com/Schenkee/TryHackMe-Guides/tree/main/Rabbit_Store) | [Report](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Reports/Rabbit_Store_report.md) Work in Progress |    
+| [Stealth](https://tryhackme.com/room/stealth) |  🟡 Medium   | [View Guide]() Work in Progress | Work in Progress |   
 | *(More Coming Soon)*      |               |                                       |
   
 *Difficulty as per TryHackMe
