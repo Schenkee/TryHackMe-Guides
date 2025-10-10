@@ -95,18 +95,22 @@ Implement strict input validation and allow-list server-side URL fetches. Block 
 ---
 
 ### 3. Server-Side Template Injection  
-**CVSS v4.0 Base Score:** 
+**CVSS v4.0 Base Score:** 8.7 (High)  
+CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N  
+
+**CVSS Justification:**    
+User input passed to the Jinja2 template lead to remote code execution. The attack was network-accessible, low complexity, and required prior authenticated access to the subscription-only dashboard. This resulted in high confidentiality, integrity and availability impact.  
 
 
-**Summary:** 
+**Summary:**   
 
-**Background:** 
+**Background:**   
 
-**Technical details & Evidence:** 
+**Technical details & Evidence:**   
 
-**Impact:** 
+**Impact:**   
 
-**Remediation Advice:** 
+**Remediation Advice:**   
 
 ---
 
