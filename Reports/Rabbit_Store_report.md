@@ -13,7 +13,7 @@ Remediation recommendations include securing web application endpoints against M
 ## Vulnerabilities  
 
 ### 1. Mass Assignment Vulnerability  
-**CVSS v4.0 Base Score:** 6.9 (Medium)
+**CVSS v4.0 Base Score:** 6.9 (Medium)  
 CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N  
 
 **CVSS Justification:**  
@@ -29,7 +29,10 @@ The `/api/register` endpoint accepted client-controlled fields that should have 
 **Technical details & Evidence:**   
 HTTP requests were intercepted and modified using Caido as follows.    
 
-Via a web browser, a registration request was submitted to `http://storage.cloudsite.thm/api/register` this request was intercepted via Caido and the value, `"subscription":"active"` added to the body. 
+Via a web browser, a registration request was submitted to `http://storage.cloudsite.thm/api/register` this request was intercepted via Caido and the value below added to the body.  
+```JSON
+"subscription":"active"
+```  
 ![MAV - active register request.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/MAV%20-%20active%20register%20request.png)  
  
 This modified request was then forwarded onto the server which responded with a new JWT token and a response indicating `active` status in the body.  
@@ -45,7 +48,7 @@ When logging in as the newly registered user access to the subscription-only das
 Unauthorised elevation of account privileges enabling access to restricted subscription-only content can cause significant financial and reputational damage to the organisation. Attackers may leak subscription-only content online or potentially undertake mapping of internal services and prepare further attacks. 
 
 **Remediation Advice:**   
-Enforce an allowlist of assignable fields server-side. Validate and normalise inputs and ensure default account attributes are set server-side only, do not accept client-controlled values for authorisation-sensitive attributes. Perform a detailed review of all API endpoints to ensure only intended fields can be modified by clients.   
+Enforce an allow-list of assignable fields server-side. Validate and normalise inputs and ensure default account attributes are set server-side only, do not accept client-controlled values for authorisation-sensitive attributes. Perform a detailed review of all API endpoints to ensure only intended fields can be modified by clients.   
 
 ---
 
@@ -54,17 +57,40 @@ Enforce an allowlist of assignable fields server-side. Validate and normalise in
 CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:L/VI:N/VA:N/SC:L/SI:N/SA:N  
 
 **CVSS Justification:**  
-The upload-from-URL featured allowed the server to fetch arbitrary URLs, including `localhost` on the same host. Attack complexity is low, requires access to the subscription only dashboard and the impact include disclosure of limited internal resources. As such a lower-than-expected CVSS v4.0 score was modelled, in practice Server-Side Request Forgery is a high-risk vulnerability, and remediation should be prioritised.  
+The "Upload From URL" feature allowed the server to fetch arbitrary URLs, including `localhost` on the same host. Attack complexity is low and the issue requires prior authenticated access to the subscription-only dashboard. Exploitation disclosed limited internal resources. As such a lower-than-expected CVSS v4.0 score was modelled, in practice Server-Side Request Forgery is a high-risk vulnerability, and remediation should be prioritised.  
 
-**Summary:**
+**Summary:**  
+The "Upload From URL" internal functionality does not have sufficient filtering implemented. This allows fetching of documents on the local host by pointing the feature at `http://localhost:3000/api/docs`. The API `/api/docs` file then became accessible via the provided upload link, enabling attackers to retrieve hidden internal data. This behaviour is representative of SSRF (see OWASP Server-Side Request Forgery in appendices).  
 
-**Background:** 
+**Background:**   
+During initial enumeration it was discovered the host was running on Express (default port `3000`). When pointing the "Upload From URL" functionality at `http://localhost:3000/api/docs` the response confirmed that this document had been successfully uploaded, and the user was given a new URL to access this file. This is a textbook example of SSRF attacks against a host server; this can also enable further access to restricted resources as when a URL is supplied to this feature it appears to originate from a trusted location. Due to a lack of adequate input filtering the user was able to access internal documentation in the way of the `/api/docs` file and read its contents. 
 
-**Technical details & Evidence:** 
+**Technical details & Evidence:**   
+HTTP requests when attempting to use the "Upload From URL" functionality were intercepted and modified using Caido as follows.  
 
-**Impact:** 
+The initial request is intercepted and the URL adjusted as below.
+```JSON
+{"url":"http://localhost:3000/api/docs"}
+```
+![SSRF - localhost request.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSRF%20-%20localhost%20request.png)  
 
-**Remediation Advice:** 
+The server then responded with 
+```JSON
+{
+  "message":"File stored from URL successfully",
+  "path":"/api/uploads/fe6f5631-316f-4877-ad1f-71f0a8395c4a"
+}
+```
+![SSRF - localhost response.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSRF%20-%20localhost%20response.png)
+
+When accessing the provided file location `http://storage.cloudsite.thm/api/uploads/fe6f5631-316f-4877-ad1f-71f0a8395c4a` the contents of the internal `/api/docs` file could be read.    
+![SSRF - api docs success.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSRF%20-%20api%20docs%20success.png)
+
+**Impact:**   
+A successful SSRF can lead to unauthorised access to internal resources. In this instance, internal API endpoints and data were disclosed. If SSRF is used to connect to external third-party systems, it may facilitate malicious actions that appear to originate from the vulnerable organisation.  
+
+**Remediation Advice:**  
+Implement strict input validation and allow-list server-side URL fetches. Block requests to private IP ranges and link-local addresses (for example: `127.0.0.0/8`). Require authentication and authorization for internal endpoints. Add server-side logging for fetch requests with alerting enabled for anomalous or suspicious fetches. See the SSRF guidance in the appendices for further details.  
 
 ---
 
@@ -100,3 +126,6 @@ The upload-from-URL featured allowed the server to fetch arbitrary URLs, includi
 
 ---
 ## Appendices  
+[OWASP Top 10](https://owasp.org/www-project-top-ten/)  
+[Server-Side Request Forgery](https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/)  
+[CVSS 4.0](https://www.first.org/cvss/calculator/4-0)  
