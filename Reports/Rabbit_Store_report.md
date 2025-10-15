@@ -1,7 +1,7 @@
 # Penetration Test Report    
 **Engagement:** TryHackMe - Rabbit Store   
 **Date:** October 2025  
-**Tester:** Colin S      
+**Tester:** Colin S       
 
 ---
 
