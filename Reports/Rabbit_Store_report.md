@@ -101,14 +101,17 @@ CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
 **CVSS Justification:**    
 User input passed to the Jinja2 template lead to remote code execution. The attack was network-accessible, low complexity, and required prior authenticated access to the subscription-only dashboard. This resulted in high confidentiality, integrity and availability impact.  
 
-
 **Summary:**   
+The `/api/fetch_messages_from_chatbot` POST endpoint which is still under development reflected user supplied inputs into the template. A crafted payload could be supplied and executed to run system commands; this succesfully allowed access to the target machine has a low privilge user.  
 
 **Background:**   
+Template rending logic included unsanitised user inputs. When supplying a user input to the `/api/fetch_messages_from_chatbot` endpoint via a HTTP POST request the output was reflected into the Jinja2 template. Using a sequence of special characters commonly used in template expressions, such as `${{<%[%'"}}%\` an exeption was raised in the server response providing details as to the template engine in use and the confirmation of a existing template-injection vulnerability. A specially crafted message was then sent to the endpoint to inititate a reverse shell connection which was executed succesfully and provided shell access to the target as the user `azrael`.  
 
-**Technical details & Evidence:**   
+**Technical details & Evidence:** 
+
 
 **Impact:**   
+
 
 **Remediation Advice:**   
 
