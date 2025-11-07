@@ -146,7 +146,7 @@ xfreerdp3 /v:HostEvasion /u:tester /p:Password123
 ```  
 ![RDP - start.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Stealth/Images/RDP%20-%20start.png)  
 
-The `tester` session was used to accept UAD and retrieve sensitive data from the target system.
+The `tester` session was used to accept UAC and retrieve sensitive data from the target system.
 
 
 **Impact:** 
